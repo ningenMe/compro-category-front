@@ -1,6 +1,5 @@
 <template>
   <v-container>
-    <div class="example3">{{ responseBody }}</div>
     <div v-for="(e,i) in responseBody" v-bind:key="i">
     {{e}}
     </div>    
@@ -18,7 +17,7 @@ export default {
   },
   mounted () {
      axios
-      .get('http://18.182.85.26/compro_category/fields')
+      .get('https://ningenme.net/compro_category.api/fields')
       .then(response => (this.responseBody = response.data))
   }
 
