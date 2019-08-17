@@ -1,6 +1,7 @@
 import Vue from 'vue'
 import Router from 'vue-router'
-import Main from './views/Main.vue'
+import Root from './views/Root.vue'
+import Field from './views/Field.vue'
 
 Vue.use(Router)
 
@@ -10,8 +11,12 @@ export default new Router({
     routes: [
     {
         path: '/',
-        name: 'main',
-        component: Main
+        name: 'root',
+        component: Root
+    },
+    {
+        path: '/field/:fieldname',
+        component: Field
     }
 ]
 })
