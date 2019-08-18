@@ -7,7 +7,7 @@
         <v-container class="pa-2">
           <v-card>
             <v-card-text>
-              <router-link v-bind:to="'./field/' + e.key">{{e.name}}</router-link>
+              <router-link v-bind:to="'/field/'+e.label">{{e.name}}</router-link>
             </v-card-text>
           </v-card>
         </v-container>
@@ -31,7 +31,8 @@ export default {
     })
 
     axios
-      .get('https://ningenme.net/compro_category.api/fields')
+//      .get('https://ningenme.net/compro_category.api/fields')
+      .get('http://127.0.0.1:8000/fields')
       .then(response => (this.responseBody = response.data))
   }
 
