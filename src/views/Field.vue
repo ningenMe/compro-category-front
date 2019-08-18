@@ -36,8 +36,7 @@ export default {
       'name': 'compro_category/domains/'+this.$route.params.label })
 
     axios
-//      .get('https://ningenme.net/compro_category.api/domains/')
-      .get('http://127.0.0.1:8000/domains/'+this.$route.params.label)
+      .get('https://ningenme.net/compro_category.api/domains/'+this.$route.params.label)
       .then(response => (this.responseBody = response.data))
   }
 
