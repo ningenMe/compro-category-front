@@ -8,14 +8,18 @@ export default new Vuex.Store({
         fields: [],
     },
     getters: {
-        getFields: (state, getters) => {
+        getFields (state) {
             return state.fields;
         },
     },
     mutations: {
-        setFields: (state, payload) => {
-            return state.fields = payload;
+        setFields (state, payload) {
+            state.fields = payload;
         },
     },
-    actions: {}
+    actions: {
+        setFields (context, fields) {
+            context.commit('setFields', fields)
+        }
+    },
 })

@@ -1,9 +1,9 @@
 <template>
   <v-container>
     <div class="display-1 font-weight-black">Solved Problems</div>
-    <div>{{$store.state.fields}}</div>
+    <div>{{ getMessage }}</div>
     <v-layout row wrap>
-      <v-flex xs6 v-for="(e,i) in responseBody" v-bind:key="i">
+      <v-flex xs6 v-for="(e,i) in fields" v-bind:key="i">
         <v-container class="pa-2">
           <v-card>
             <v-card-text>
@@ -22,8 +22,7 @@ import axios from 'axios';
 export default {
   data () {
     return {
-      responseBody : [],
-      store : null,
+      fields : [],
     }
   },
   mounted () {
@@ -33,11 +32,16 @@ export default {
 
     axios
       .get('https://ningenme.net/compro_category.api/fields')
-      .then(response => (this.responseBody = response.data))
-    
-    
-    this.store.state.fields = this.responseBody;
+      .then(response => (this.fields = response.data))
+
+    this.$store.dispatch('setFields', this.fields)
+  },
+  computed: {
+    getMessage () {
+      return this.$store.getters['getFields']
+    }
   }
+
 
 }
 </script>
