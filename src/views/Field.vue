@@ -1,13 +1,15 @@
 <template>
   <v-container>
     <router-link to="/">もどる</router-link>
-    <div> {{ $route.params.label }}</div>
-    <v-card v-for="(domain,i) in responseBody" v-bind:key="i">
+    
+    <div>{{ field[$route.params.label]["name"] }}</div>
+
+    <v-card v-for="(domain,i) in domains" v-bind:key="i">
       <v-toolbar color="grey darken-3" dark height="24px">
         <v-toolbar-title>{{domain.name}}</v-toolbar-title>
       </v-toolbar>
         <div>
-          <b-table small :items="domain.problems" :fields="fields">
+          <b-table small :items="domain.problems" :fields="keys">
             <template slot="estimation" slot-scope="data">
               {{ data.value}}
             </template>
@@ -25,9 +27,11 @@ import axios from 'axios';
 export default {
   data () {
     return {
-      responseBody : [],
+      field : this.$store.getters['getFields'],
+      domains: [],
       route: null,
-      fields: [
+
+      keys: [
         {key:'problem'},
         {key:'score'},
         {key:'estimation',sortable: true},
@@ -35,14 +39,19 @@ export default {
     }
   },
   mounted () {
-    axios.post('https://ningenme.net/home.api/access',{
+    axios
+      .post('https://ningenme.net/home.api/access',{
       'name': 'compro_category/domains/'+this.$route.params.label })
 
     axios
       .get('https://ningenme.net/compro_category.api/domains/'+this.$route.params.label)
-      .then(response => (this.responseBody = response.data))
-  }
-
+      .then(response => (this.domains = response.data))
+  },
+  method: {
+    getFields: function() {
+      return this.$store.getters['getFields']
+    },
+  }  
 }
 
 

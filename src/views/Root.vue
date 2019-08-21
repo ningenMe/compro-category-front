@@ -1,7 +1,6 @@
 <template>
   <v-container>
     <div class="display-1 font-weight-black">Solved Problems</div>
-    <div>{{ getMessage }}</div>
     <v-layout row wrap>
       <v-flex xs6 v-for="(e,i) in fields" v-bind:key="i">
         <v-container class="pa-2">
@@ -25,6 +24,20 @@ export default {
       fields : [],
     }
   },
+  watch : {
+    fields: function() {
+      var fieldsMap = {}
+      this.fields.forEach(element => {
+        fieldsMap[element.label] = element
+      });
+      this.$store.dispatch('setFields', fieldsMap)
+    }
+  },
+  computed: {
+    getFields: function() {
+      return this.$store.getters['getFields']
+    },
+  },
   mounted () {
     axios.post('https://ningenme.net/home.api/access',{
       'name':'compro_category'
@@ -33,15 +46,7 @@ export default {
     axios
       .get('https://ningenme.net/compro_category.api/fields')
       .then(response => (this.fields = response.data))
-
-    this.$store.dispatch('setFields', this.fields)
-  },
-  computed: {
-    getMessage () {
-      return this.$store.getters['getFields']
-    }
   }
-
 
 }
 </script>
