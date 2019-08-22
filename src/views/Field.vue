@@ -1,8 +1,8 @@
 <template>
   <v-container>
-    <router-link to="/">もどる</router-link>
+    <v-btn rounded color="deep-purple lighten-4" to="/">もどる</v-btn>
     
-    <div>{{ field[$route.params.label]["name"] }}</div>
+    <v-btn block color="secondary" dark>{{ field[$route.params.label]["name"] }}</v-btn>
 
     <v-card v-for="(domain,i) in domains" v-bind:key="i">
       <v-toolbar color="grey darken-3" dark height="24px">
