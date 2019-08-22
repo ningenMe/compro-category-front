@@ -23,7 +23,19 @@
       </div>
     </v-card>
 
-    <v-btn rounded color="deep-purple lighten-4" to="/">もどる</v-btn>
+
+    <v-row>
+      <v-col
+        cols="auto"
+        class="mr-auto"
+      >
+        <v-btn rounded color="deep-purple lighten-4" to="/">もどる</v-btn>
+      </v-col>
+
+      <v-col cols="auto">
+        <v-btn rounded color="light-blue accent-2" to="/field/create">domain追加</v-btn>
+      </v-col>
+    </v-row>
 
   </v-container>
 </template>
@@ -47,7 +59,7 @@ export default {
   mounted () {
     axios
       .post('https://ningenme.net/home.api/access',{
-      'name': 'compro_category/domains/'+this.$route.params.label })
+      'name': 'compro_category/field/'+this.$route.params.label })
 
     axios
       .get('https://ningenme.net/compro_category.api/domains/'+this.$route.params.label)
