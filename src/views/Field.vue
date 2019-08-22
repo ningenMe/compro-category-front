@@ -1,24 +1,30 @@
 <template>
   <v-container>
-    <v-btn rounded color="deep-purple lighten-4" to="/">もどる</v-btn>
-    
-    <v-btn block color="secondary" dark>{{ field[$route.params.label]["name"] }}</v-btn>
 
+    <v-card class="my-4" color="secondary" dark>
+      <div class="text-center">
+        {{ field[$route.params.label]["name"] }}
+      </div>
+    </v-card>
+    
     <v-card v-for="(domain,i) in domains" v-bind:key="i">
       <v-toolbar color="grey darken-3" dark height="24px">
         <v-toolbar-title>{{domain.name}}</v-toolbar-title>
       </v-toolbar>
-        <div>
-          <b-table small :items="domain.problems" :fields="keys">
-            <template slot="estimation" slot-scope="data">
-              {{ data.value}}
-            </template>
-            <template slot="problem" slot-scope="data">
-              <a v-bind:href="data.item.url" target="_blank">{{data.item.name}} </a>
-            </template>
-          </b-table>
-        </div>
+      <div>
+        <b-table small :items="domain.problems" :fields="keys">
+          <template slot="estimation" slot-scope="data">
+            {{ data.value}}
+          </template>
+          <template slot="problem" slot-scope="data">
+            <a v-bind:href="data.item.url" target="_blank">{{data.item.name}} </a>
+          </template>
+        </b-table>
+      </div>
     </v-card>
+
+    <v-btn rounded color="deep-purple lighten-4" to="/">もどる</v-btn>
+
   </v-container>
 </template>
 
