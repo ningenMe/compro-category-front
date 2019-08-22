@@ -6,12 +6,25 @@
         <v-container class="pa-2">
           <v-card>
             <v-card-text>
-              <router-link v-bind:to="'/field/'+e.label">{{e.name}}</router-link>
+              <router-link v-bind:to="'/field/'+e.label+'/domain/index'">{{e.name}}</router-link>
             </v-card-text>
           </v-card>
         </v-container>
       </v-flex>
     </v-layout>
+
+    <v-row>
+      <v-col
+        cols="auto"
+        class="mr-auto"
+      >
+      </v-col>
+
+      <v-col cols="auto">
+        <v-btn rounded color="light-blue accent-2" to="/field/create">新規作成</v-btn>
+      </v-col>
+    </v-row>
+
 
   </v-container>
 </template>

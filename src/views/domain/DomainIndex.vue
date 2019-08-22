@@ -47,7 +47,7 @@ export default {
   mounted () {
     axios
       .post('https://ningenme.net/home.api/access',{
-      'name': 'compro_category/domains/'+this.$route.params.label })
+      'name': 'compro_category/field/'+this.$route.params.label })
 
     axios
       .get('https://ningenme.net/compro_category.api/domains/'+this.$route.params.label)

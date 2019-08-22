@@ -1,7 +1,8 @@
 import Vue from 'vue'
 import Router from 'vue-router'
-import Root from './views/Root.vue'
-import Field from './views/Field.vue'
+import FieldIndex from './views/field/FieldIndex.vue'
+import FieldCreate from './views/field/FieldCreate.vue'
+import DomainIndex from './views/domain/DomainIndex.vue'
 import Tmp from './views/Tmp.vue'
 
 Vue.use(Router)
@@ -11,12 +12,23 @@ export default new Router({
     base: process.env.BASE_URL,
     routes: [{
             path: '/',
-            name: 'root',
-            component: Root
+            component: FieldIndex
         },
         {
-            path: '/field/:label',
-            component: Field
+            path: '/field/index',
+            component: FieldIndex
+        },
+        {
+            path: '/field/:label/domain/index/',
+            component: DomainIndex
+        },
+        {
+            path: '/domain/index/:label',
+            component: DomainIndex
+        },
+        {
+            path: '/field/create',
+            component: FieldCreate
         },
         {
             path: '/tmp',
