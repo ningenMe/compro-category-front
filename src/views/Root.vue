@@ -1,9 +1,8 @@
 <template>
   <v-container>
     <div class="display-1 font-weight-black">Solved Problems</div>
-
     <v-layout row wrap>
-      <v-flex xs6 v-for="(e,i) in responseBody" v-bind:key="i">
+      <v-flex xs6 v-for="(e,i) in fields" v-bind:key="i">
         <v-container class="pa-2">
           <v-card>
             <v-card-text>
@@ -22,8 +21,22 @@ import axios from 'axios';
 export default {
   data () {
     return {
-      responseBody : [],
+      fields : [],
     }
+  },
+  watch : {
+    fields: function() {
+      var fieldsMap = {}
+      this.fields.forEach(element => {
+        fieldsMap[element.label] = element
+      });
+      this.$store.dispatch('setFields', fieldsMap)
+    }
+  },
+  computed: {
+    getFields: function() {
+      return this.$store.getters['getFields']
+    },
   },
   mounted () {
     axios.post('https://ningenme.net/home.api/access',{
@@ -32,7 +45,7 @@ export default {
 
     axios
       .get('https://ningenme.net/compro_category.api/fields')
-      .then(response => (this.responseBody = response.data))
+      .then(response => (this.fields = response.data))
   }
 
 }
