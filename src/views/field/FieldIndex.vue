@@ -21,7 +21,7 @@
       </v-col>
 
       <v-col cols="auto">
-        <v-btn rounded color="light-blue accent-2" to="/field/create">新規作成</v-btn>
+        <v-btn rounded color="light-blue accent-2" to="/field/create">field追加</v-btn>
       </v-col>
     </v-row>
 

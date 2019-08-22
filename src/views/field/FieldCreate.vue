@@ -61,10 +61,8 @@ export default {
   methods : {
     fieldCreate : function (event) {
       axios({
-//        url: 'http://127.0.0.1:8000/fields/create',
-        url: 'https://ningenme.net/compro_category/fields/create',
+        url: 'https://ningenme.net/compro_category.api/fields/create',
         method: 'post',
-        headers: {'X-CSRF-TOKEN' : document.querySelector('meta[name="csrf-token"]').getAttribute('content')},
         data: {
           'name': this.name,
           'label': this.label,
