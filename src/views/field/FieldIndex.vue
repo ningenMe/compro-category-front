@@ -61,7 +61,7 @@ export default {
     })
 
     axios
-      .get('http://127.0.0.1:8000/fields')
+      .get('https://ningenme.net/compro_category.api/fields')
       .then(response => (this.fields = response.data))
   }
 

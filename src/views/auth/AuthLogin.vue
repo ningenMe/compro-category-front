@@ -57,7 +57,7 @@ export default {
     authLogin : function (event) {
 
       axios({
-        url: 'http://127.0.0.1:8000/api/login',
+        url: 'https://ningenme.net/compro_category.api/api/login',
         method: 'post',
         data: {
           'email': this.email,
@@ -70,7 +70,7 @@ export default {
     authCheck : function (event) {
 
       axios({
-        url: 'http://127.0.0.1:8000/api/me',
+        url: 'https://ningenme.net/compro_category.api/api/me',
         method: 'get',
         headers: {
                    "Authorization" : "Bearer " + this.$store.getters['getAccessToken'], 
