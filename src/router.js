@@ -3,6 +3,7 @@ import Router from 'vue-router'
 import FieldIndex from './views/field/FieldIndex.vue'
 import FieldCreate from './views/field/FieldCreate.vue'
 import DomainIndex from './views/domain/DomainIndex.vue'
+import AuthLogin from './views/auth/AuthLogin.vue'
 import Tmp from './views/Tmp.vue'
 
 Vue.use(Router)
@@ -31,8 +32,8 @@ export default new Router({
             component: FieldCreate
         },
         {
-            path: '/tmp',
-            component: Tmp
+            path: '/auth/login',
+            component: AuthLogin
         }
     ]
 })

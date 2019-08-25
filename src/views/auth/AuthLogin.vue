@@ -1,33 +1,24 @@
 <template>
   <v-container>
-    <div class="display-1">Create New Field!!!</div>
       <v-form
       ref="form"
       lazy-validation
       >
         <v-text-field
-          v-model="name"
+          v-model="email"
           :counter="255"
-          label="name"
+          label="email"
           outlined
           required
         ></v-text-field>
 
         <v-text-field
-          v-model="label"
+          v-model="password"
           :counter="255"
-          label="label"
+          label="password"
           outlined
           required
         ></v-text-field>
-
-        <v-text-field
-          v-model="order"
-          label="order"
-          outlined
-          required
-        ></v-text-field>
-
       </v-form>
 
       <v-row>
@@ -39,10 +30,9 @@
         </v-col>
 
         <v-col cols="auto">
-          <v-btn rounded color="light-blue accent-2" v-on:click="fieldCreate">送信</v-btn>
+          <v-btn rounded color="light-blue accent-2" v-on:click="authLogin">ログイン</v-btn>
         </v-col>
       </v-row>
-
   </v-container>
 </template>
 
@@ -51,31 +41,44 @@ import axios from 'axios';
 export default {
   data () {
     return {
-      name     : null,
-      label    : null,
-      order    : null,
-      json     : null,
+      email    : null,
+      password : null,
       response : [],
-      message  : null,
     }
   },
+  watch : {
+    response: function() {
+      this.$store.dispatch('setEmail',this.email)
+      this.$store.dispatch('setAccessToken',this.response["access_token"])
+    },
+  },
+
   methods : {
-    fieldCreate : function (event) {
+    authLogin : function (event) {
+
       axios({
-        url: 'http://127.0.0.1:8000/api/fields/create',
+        url: 'http://127.0.0.1:8000/api/login',
         method: 'post',
+        data: {
+          'email': this.email,
+          'password': this.password,
+        }
+      }).then(
+        response => (this.response = response.data)
+        )
+    },
+    authCheck : function (event) {
+
+      axios({
+        url: 'http://127.0.0.1:8000/api/me',
+        method: 'get',
         headers: {
                    "Authorization" : "Bearer " + this.$store.getters['getAccessToken'], 
         },
-        data: {
-          'name': this.name,
-          'label': this.label,
-          'order': this.order, 
-        }
-      }).then(response => (
-        this.response = response.data))
-        this.$router.push('/field/index')
+      }).then(response => (this.response = response.data))
+      this.$router.push('/field/index')
     }
+
   }
 }
         
