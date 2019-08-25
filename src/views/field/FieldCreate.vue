@@ -62,7 +62,7 @@ export default {
   methods : {
     fieldCreate : function (event) {
       axios({
-        url: 'http://127.0.0.1:8000/api/fields/create',
+        url: 'https://ningenme.net/compro_category.api/api/fields/create',
         method: 'post',
         headers: {
                    "Authorization" : "Bearer " + this.$store.getters['getAccessToken'], 
