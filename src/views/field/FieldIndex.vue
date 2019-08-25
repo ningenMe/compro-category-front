@@ -7,6 +7,8 @@
           <v-card>
             <v-card-text>
               <router-link v-bind:to="'/field/'+e.label+'/domain/index'">{{e.name}}</router-link>
+              <br />
+              <router-link v-bind:to = "'/field/edit/' + e.label" v-if="$store.getters['getAccessToken'] != null">編集</router-link>
             </v-card-text>
           </v-card>
         </v-container>
@@ -53,11 +55,6 @@ export default {
       this.$store.dispatch('setFields', fieldsMap)
     }
   },
-  computed: {
-    getFields: function() {
-      return this.$store.getters['getFields']
-    },
-  },
   mounted () {
     axios.post('https://ningenme.net/home.api/access',{
       'name':'compro_category'
@@ -66,7 +63,7 @@ export default {
     axios
       .get('https://ningenme.net/compro_category.api/fields')
       .then(response => (this.fields = response.data))
-  }
+  },
 
 }
 </script>
