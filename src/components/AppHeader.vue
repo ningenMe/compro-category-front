@@ -1,6 +1,6 @@
 <template>
   <b-navbar toggleable="lg" type="dark" variant="dark" fixed = "top">
-    <b-navbar-brand href="https://ningenMe.net/compro_category"><span class="linkline">Compro Category</span></b-navbar-brand>
+    <b-navbar-brand to = "/"><span class="linkline">Compro Category</span></b-navbar-brand>
         <b-navbar-toggle target="nav-collapse"></b-navbar-toggle>
         <b-collapse id="nav-collapse" is-nav>
           <b-navbar-nav class="ml-auto">
@@ -13,7 +13,7 @@
             <b-nav-item-dropdown text="Compro" right>
               <b-dropdown-item target="_blank" href="https://atcoder.jp/users/ningenMe"><span class="linkline">AtCoder</span></b-dropdown-item>
               <b-dropdown-item target="_blank" href="https://codeforces.com/profile/ningenMe"><span class="linkline">Codeforces</span></b-dropdown-item>
-              <b-dropdown-item target="_blank" href="https://csacademy.com/user/ningenMe"><span class="linkline">CSAcademy</span></b-dropdown-item>
+              <b-dropdown-item target="_blank" href="https://csacademy.com/user/ningenMe"><span class="linkline">CSAcademy</span></b-dropdown-item>            
             </b-nav-item-dropdown>
             
           </b-navbar-nav>

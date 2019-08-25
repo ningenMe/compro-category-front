@@ -18,14 +18,18 @@
         cols="auto"
         class="mr-auto"
       >
+        <v-btn rounded color="yellow accent-3" v-if="this.$store.getters['getAccessToken'] != null">{{this.$store.getters['getEmail']}}</v-btn>
       </v-col>
 
       <v-col cols="auto">
-        <v-btn rounded color="light-blue accent-2" to="/field/create">field追加</v-btn>
+        <v-btn rounded color="light-blue accent-2" to="/field/create" v-if="this.$store.getters['getAccessToken'] != null">field追加</v-btn>
       </v-col>
+
+      <v-col cols="auto">
+        <v-btn rounded color="teal accent-2" to="/auth/login">ログイン</v-btn>
+      </v-col>
+
     </v-row>
-
-
   </v-container>
 </template>
 
@@ -57,7 +61,7 @@ export default {
     })
 
     axios
-      .get('https://ningenme.net/compro_category.api/fields')
+      .get('http://127.0.0.1:8000/fields')
       .then(response => (this.fields = response.data))
   }
 
