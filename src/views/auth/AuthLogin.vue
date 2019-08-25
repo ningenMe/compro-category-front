@@ -29,6 +29,14 @@
           <v-btn rounded color="deep-purple lighten-4" to="/field/index">もどる</v-btn>
         </v-col>
 
+        <v-col
+          cols="auto"
+          class="mr-auto"
+        >
+          <v-btn rounded color="yellow accent-3" v-if="this.$store.getters['getAccessToken'] != null">{{this.$store.getters['getEmail']}}</v-btn>
+        </v-col>
+
+
         <v-col cols="auto">
           <v-btn rounded color="light-blue accent-2" v-on:click="authLogin">ログイン</v-btn>
         </v-col>
