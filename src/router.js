@@ -4,7 +4,7 @@ import FieldIndex from './views/field/FieldIndex.vue'
 import FieldCreate from './views/field/FieldCreate.vue'
 import DomainIndex from './views/domain/DomainIndex.vue'
 import AuthLogin from './views/auth/AuthLogin.vue'
-import Tmp from './views/Tmp.vue'
+import AuthRegister from './views/auth/AuthRegister'
 
 Vue.use(Router)
 
@@ -34,6 +34,10 @@ export default new Router({
         {
             path: '/auth/login',
             component: AuthLogin
+        },
+        {
+            path: '/auth/register',
+            component: AuthRegister
         }
     ]
 })
