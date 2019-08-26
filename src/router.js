@@ -4,6 +4,8 @@ import FieldIndex from './views/field/FieldIndex.vue'
 import FieldCreate from './views/field/FieldCreate.vue'
 import FieldEdit from './views/field/FieldEdit.vue'
 import DomainIndex from './views/domain/DomainIndex.vue'
+import DomainCreate from './views/domain/DomainCreate.vue'
+import DomainEdit from './views/domain/DomainEdit.vue'
 import AuthLogin from './views/auth/AuthLogin.vue'
 import AuthRegister from './views/auth/AuthRegister'
 
@@ -22,8 +24,8 @@ export default new Router({
             component: FieldIndex
         },
         {
-            path: '/field/:label/domain/index/',
-            component: DomainIndex
+            path: '/field/create',
+            component: FieldCreate
         },
         {
             path: '/field/edit/:label',
@@ -35,8 +37,12 @@ export default new Router({
             component: DomainIndex
         },
         {
-            path: '/field/create',
-            component: FieldCreate
+            path: '/domain/create',
+            component: DomainCreate
+        },
+        {
+            path: '/domain/edit/:id',
+            component: DomainEdit
         },
         //auth
         {

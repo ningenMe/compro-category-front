@@ -56,13 +56,14 @@ export default {
       order    : null,
       json     : null,
       response : [],
-      message  : null,
+      urlPrefixComproCategoryAPI : process.env.VUE_APP_URL_PREFIX_COMPRO_CATEGORY_API,
+
     }
   },
   methods : {
     fieldCreate : function (event) {
       axios({
-        url: 'https://ningenme.net/compro_category.api/api/fields/create',
+        url: this.urlPrefixComproCategoryAPI + '/api/fields/create',
         method: 'post',
         headers: {
                    "Authorization" : "Bearer " + this.$store.getters['getAccessToken'], 

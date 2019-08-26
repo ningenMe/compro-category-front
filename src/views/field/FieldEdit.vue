@@ -61,6 +61,8 @@ export default {
       label    : null,
       order    : null,
       response : [],
+      urlPrefixComproCategoryAPI : process.env.VUE_APP_URL_PREFIX_COMPRO_CATEGORY_API,
+
     }
   },
   watch : {
@@ -72,15 +74,17 @@ export default {
     }
   },
   mounted () {
-    axios
-      .get('https://ningenme.net/compro_category.api/fields/find/'+this.$route.params.label)
+    axios({
+        url: this.urlPrefixComproCategoryAPI + '/fields/find/' + this.$route.params.label,
+        method: 'get',
+      })
       .then(response => (this.field = response.data))
   },
 
   methods : {
     fieldDelete : function (event) {
       axios({
-        url: 'https://ningenme.net/compro_category.api/api/fields/delete',
+        url: this.urlPrefixComproCategoryAPI + '/api/fields/delete',
         method: 'post',
         headers: {
                    "Authorization" : "Bearer " + this.$store.getters['getAccessToken'], 
@@ -94,7 +98,7 @@ export default {
     },
     fieldUpdate : function (event) {
       axios({
-        url: 'https://ningenme.net/compro_category.api/api/fields/update',
+        url: this.urlPrefixComproCategoryAPI + '/api/fields/update',
         method: 'post',
         headers: {
                    "Authorization" : "Bearer " + this.$store.getters['getAccessToken'], 

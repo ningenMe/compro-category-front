@@ -53,6 +53,8 @@ export default {
       email    : null,
       password : null,
       response : [],
+      urlPrefixComproCategoryAPI : process.env.VUE_APP_URL_PREFIX_COMPRO_CATEGORY_API,
+
     }
   },
 
