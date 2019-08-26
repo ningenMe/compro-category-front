@@ -29,13 +29,6 @@
           <v-btn rounded color="deep-purple lighten-4" to="/field/index">もどる</v-btn>
         </v-col>
 
-        <v-col
-          cols="auto"
-          class="mr-auto"
-        >
-          <v-btn rounded color="yellow accent-3" v-if="this.$store.getters['getAccessToken'] != null">{{this.$store.getters['getEmail']}}</v-btn>
-        </v-col>
-
 
         <v-col cols="auto">
           <v-btn rounded color="light-blue accent-2" v-on:click="authLogin">ログイン</v-btn>
@@ -52,6 +45,8 @@ export default {
       email    : null,
       password : null,
       response : [],
+      urlPrefixComproCategoryAPI : process.env.VUE_APP_URL_PREFIX_COMPRO_CATEGORY_API,
+
     }
   },
   watch : {
@@ -65,7 +60,7 @@ export default {
     authLogin : function (event) {
 
       axios({
-        url: 'https://ningenme.net/compro_category.api/api/login',
+        url: this.urlPrefixComproCategoryAPI + '/api/login',
         method: 'post',
         data: {
           'email': this.email,
@@ -78,7 +73,7 @@ export default {
     authCheck : function (event) {
 
       axios({
-        url: 'https://ningenme.net/compro_category.api/api/me',
+        url: this.urlPrefixComproCategoryAPI + '/api/me',
         method: 'get',
         headers: {
                    "Authorization" : "Bearer " + this.$store.getters['getAccessToken'], 

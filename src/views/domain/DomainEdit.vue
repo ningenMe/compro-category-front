@@ -1,22 +1,22 @@
 <template>
   <v-container>
-    <div class="display-1">Edit</div>
+    <div class="display-1">DomainEdit</div>
       <v-form
       ref="form"
       lazy-validation
       >
         <v-text-field
-          v-model="name"
+          v-model="field.name"
           :counter="255"
-          label="name"
+          label="field"
           outlined
-          required
+          readonly
         ></v-text-field>
 
         <v-text-field
-          v-model="label"
+          v-model="name"
           :counter="255"
-          label="label"
+          label="name"
           outlined
           required
         ></v-text-field>
@@ -35,15 +35,15 @@
           cols="auto"
           class="mr-auto"
         >
-          <v-btn rounded color="deep-purple lighten-4" to="/field/index">もどる</v-btn>
+          <v-btn rounded color="deep-purple lighten-4" v-bind:to="'/domain/index/'+field.label">もどる</v-btn>
         </v-col>
 
         <v-col cols="auto">
-          <v-btn rounded color="red accent-3" v-on:click="fieldDelete">削除</v-btn>
+          <v-btn rounded color="red accent-3" v-on:click="domainDelete">削除</v-btn>
         </v-col>
 
         <v-col cols="auto">
-          <v-btn rounded color="light-blue accent-2" v-on:click="fieldUpdate">更新</v-btn>
+          <v-btn rounded color="light-blue accent-2" v-on:click="domainUpdate">更新</v-btn>
         </v-col>
       </v-row>
 
@@ -55,36 +55,34 @@ import axios from 'axios';
 export default {
   data () {
     return {
-      field    : null,
+      field    : this.$store.getters['getField'],
+      domain   : null,
       id       : null,
       name     : null,
-      label    : null,
       order    : null,
       response : [],
       urlPrefixComproCategoryAPI : process.env.VUE_APP_URL_PREFIX_COMPRO_CATEGORY_API,
-
     }
   },
   watch : {
-    field: function() {
-      this.id    = this.field["id"]
-      this.name  = this.field["name"]
-      this.label = this.field["label"]
-      this.order = this.field["order"]
+    domain: function() {
+      this.id    = this.domain["id"]
+      this.name  = this.domain["name"]
+      this.order = this.domain["order"]
     }
   },
   mounted () {
     axios({
-        url: this.urlPrefixComproCategoryAPI + '/fields/find/' + this.$route.params.label,
-        method: 'get',
-      })
-      .then(response => (this.field = response.data))
+      url: this.urlPrefixComproCategoryAPI + '/domains/find/' + +this.$route.params.id,
+      method: 'get',
+    })
+    .then(response => (this.domain = response.data))
   },
 
   methods : {
-    fieldDelete : function (event) {
+    domainDelete : function (event) {
       axios({
-        url: this.urlPrefixComproCategoryAPI + '/api/fields/delete',
+        url: this.urlPrefixComproCategoryAPI + '/api/domains/delete',
         method: 'post',
         headers: {
                    "Authorization" : "Bearer " + this.$store.getters['getAccessToken'], 
@@ -94,24 +92,24 @@ export default {
         }
       }).then(response => (
         this.response = response.data))
-      this.$router.push('/field/index')
+      this.$router.push('/domain/index/'+this.field.label)
     },
-    fieldUpdate : function (event) {
+    domainUpdate : function (event) {
       axios({
-        url: this.urlPrefixComproCategoryAPI + '/api/fields/update',
+        url: this.urlPrefixComproCategoryAPI + '/api/domains/update',
         method: 'post',
         headers: {
                    "Authorization" : "Bearer " + this.$store.getters['getAccessToken'], 
         },
         data: {
-          'id'   : this.id,
-          'name' : this.name,
-          'label': this.label,
-          'order': this.order, 
+          'id'        : this.id,
+          'fields_id' : this.field.id,
+          'name'      : this.name,
+          'order'     : this.order, 
         }
       }).then(response => (
         this.response = response.data))
-      this.$router.push('/field/index')
+      this.$router.push('/domain/index/'+this.field.label)
     }
 
   }

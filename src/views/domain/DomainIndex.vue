@@ -3,25 +3,31 @@
 
     <v-card class="my-4" color="secondary" dark>
       <div class="text-center">
-        {{ field[$route.params.label]["name"] }}
+        {{ field.name }}
       </div>
     </v-card>
     
-    <v-card v-for="(domain,i) in domains" v-bind:key="i">
-      <v-toolbar color="grey darken-3" dark height="24px">
-        <v-toolbar-title>{{domain.name}}</v-toolbar-title>
-      </v-toolbar>
-      <div>
-        <b-table small :items="domain.problems" :fields="keys">
-          <template slot="estimation" slot-scope="data">
-            {{ data.value}}
-          </template>
-          <template slot="problem" slot-scope="data">
-            <a v-bind:href="data.item.url" target="_blank">{{data.item.name}} </a>
-          </template>
-        </b-table>
-      </div>
-    </v-card>
+    <div class="my-2" v-for="(domain,i) in domains" v-bind:key="i">
+      <v-card>
+        <v-toolbar color="grey darken-3" dark height="24px">
+          <v-toolbar-title>{{domain.name}}</v-toolbar-title>
+        </v-toolbar>
+        <div>
+          <b-table small :items="domain.problems" :fields="keys">
+            <template slot="estimation" slot-scope="data">
+              {{ data.value}}
+            </template>
+            <template slot="problem" slot-scope="data">
+              <a v-bind:href="data.item.url" target="_blank">{{data.item.name}} </a>
+            </template>
+          </b-table>
+        </div>
+      </v-card>
+      <v-btn rounded color="light-green accent-3" 
+       v-if="$store.getters['getAccessToken'] != null"
+       v-bind:to="'/domain/edit/'+domain.id">編集</v-btn>
+
+    </div>
 
 
     <v-row>
@@ -33,7 +39,7 @@
       </v-col>
 
       <v-col cols="auto">
-        <v-btn rounded color="light-blue accent-2" to="/field/create">domain追加</v-btn>
+        <v-btn rounded color="light-blue accent-2" to="/domain/create" v-if="$store.getters['getAccessToken'] != null">追加</v-btn>
       </v-col>
     </v-row>
 
@@ -45,9 +51,10 @@ import axios from 'axios';
 export default {
   data () {
     return {
-      field : this.$store.getters['getFields'],
+      field : this.$store.getters['getField'],
       domains: [],
       route: null,
+      urlPrefixComproCategoryAPI : process.env.VUE_APP_URL_PREFIX_COMPRO_CATEGORY_API,
 
       keys: [
         {key:'problem'},
@@ -62,7 +69,7 @@ export default {
       'name': 'compro_category/field/'+this.$route.params.label })
 
     axios
-      .get('https://ningenme.net/compro_category.api/domains/'+this.$route.params.label)
+      .get( this.urlPrefixComproCategoryAPI + '/domains/' + this.$route.params.label)
       .then(response => (this.domains = response.data))
   },
   method: {

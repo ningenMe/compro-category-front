@@ -1,22 +1,22 @@
 <template>
   <v-container>
-    <div class="display-1">Create New Field!!!</div>
+    <div class="display-1">Create New Domain!!!</div>
       <v-form
       ref="form"
       lazy-validation
       >
         <v-text-field
-          v-model="name"
+          v-model="field.name"
           :counter="255"
-          label="name"
+          label="field"
           outlined
-          required
+          readonly
         ></v-text-field>
 
         <v-text-field
-          v-model="label"
+          v-model="name"
           :counter="255"
-          label="label"
+          label="name"
           outlined
           required
         ></v-text-field>
@@ -35,11 +35,11 @@
           cols="auto"
           class="mr-auto"
         >
-          <v-btn rounded color="deep-purple lighten-4" to="/field/index">もどる</v-btn>
+          <v-btn rounded color="deep-purple lighten-4" v-bind:to="'/domain/index/'+field.label">もどる</v-btn>
         </v-col>
 
         <v-col cols="auto">
-          <v-btn rounded color="light-blue accent-2" v-on:click="fieldCreate">送信</v-btn>
+          <v-btn rounded color="light-blue accent-2" v-on:click="domainCreate">送信</v-btn>
         </v-col>
       </v-row>
 
@@ -51,31 +51,30 @@ import axios from 'axios';
 export default {
   data () {
     return {
+      field    : this.$store.getters['getField'],
       name     : null,
-      label    : null,
       order    : null,
       json     : null,
       response : [],
       urlPrefixComproCategoryAPI : process.env.VUE_APP_URL_PREFIX_COMPRO_CATEGORY_API,
-
     }
   },
   methods : {
-    fieldCreate : function (event) {
+    domainCreate : function (event) {
       axios({
-        url: this.urlPrefixComproCategoryAPI + '/api/fields/create',
+        url: this.urlPrefixComproCategoryAPI + '/api/domains/create',
         method: 'post',
         headers: {
                    "Authorization" : "Bearer " + this.$store.getters['getAccessToken'], 
         },
         data: {
-          'name': this.name,
-          'label': this.label,
-          'order': this.order, 
+          'fields_id': this.field.id,
+          'name'     : this.name,
+          'order'    : this.order, 
         }
       }).then(response => (
         this.response = response.data))
-        this.$router.push('/field/index')
+        this.$router.push('/domain/index/'+this.field.label)
     }
   }
 }
