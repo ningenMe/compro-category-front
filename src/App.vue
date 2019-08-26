@@ -2,6 +2,7 @@
   <v-app>
     <AppHeader/>
     <router-view/>
+    <LoginStatus/>
     <AppFooter/>
   </v-app>
 </template>
@@ -9,9 +10,10 @@
 <script>
 import AppHeader from './components/AppHeader'
 import AppFooter from './components/AppFooter'
+import LoginStatus from './components/LoginStatus'
 
 export default {
-  components: { AppHeader,AppFooter },
+  components: { AppHeader,AppFooter,LoginStatus },
 }
 </script>
 
