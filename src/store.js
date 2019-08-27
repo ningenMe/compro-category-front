@@ -7,6 +7,7 @@ export default new Vuex.Store({
     state: {
         fields: [],
         field: {},
+        domain: {},
         email: null,
         accessToken: null,
     },
@@ -16,6 +17,9 @@ export default new Vuex.Store({
         },
         getField(state) {
             return state.field;
+        },
+        getDomain(state) {
+            return state.domain;
         },
         getEmail(state) {
             return state.email;
@@ -31,6 +35,9 @@ export default new Vuex.Store({
         setField(state, payload) {
             state.field = payload;
         },
+        setDomain(state, payload) {
+            state.domain = payload;
+        },
         setEmail(state, payload) {
             state.email = payload;
         },
@@ -44,6 +51,9 @@ export default new Vuex.Store({
         },
         setField(context, field) {
             context.commit('setField', field)
+        },
+        setDomain(context, domain) {
+            context.commit('setDomain', domain)
         },
         setEmail(context, email) {
             context.commit('setEmail', email)
