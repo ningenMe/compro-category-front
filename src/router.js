@@ -6,6 +6,8 @@ import FieldEdit from './views/field/FieldEdit.vue'
 import DomainIndex from './views/domain/DomainIndex.vue'
 import DomainCreate from './views/domain/DomainCreate.vue'
 import DomainEdit from './views/domain/DomainEdit.vue'
+import ProblemCreate from './views/problem/ProblemCreate.vue'
+import ProblemEdit from './views/problem/ProblemEdit.vue'
 import AuthLogin from './views/auth/AuthLogin.vue'
 import AuthRegister from './views/auth/AuthRegister'
 
@@ -43,6 +45,15 @@ export default new Router({
         {
             path: '/domain/edit/:id',
             component: DomainEdit
+        },
+        //problem
+        {
+            path: '/problem/create',
+            component: ProblemCreate
+        },
+        {
+            path: '/problem/edit/:id',
+            component: ProblemEdit
         },
         //auth
         {

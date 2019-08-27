@@ -27,6 +27,7 @@
           outlined
           required
         ></v-text-field>
+
       </v-form>
 
       <v-row>
@@ -62,7 +63,7 @@ export default {
     authRegister : function (event) {
 
       axios({
-        url: 'https://ningenme.net/compro_category.api/api/register',
+        url: this.urlPrefixComproCategoryAPI + '/api/register',
         method: 'post',
         data: {
           'name' : this.name,
