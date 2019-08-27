@@ -22,7 +22,7 @@
         class="mr-auto"
       >
         <v-btn rounded color="teal accent-2" to="/auth/login">ログイン</v-btn>
-        <v-btn rounded color="teal accent-2" to="/auth/register">登録</v-btn>
+        <!-- <v-btn rounded color="teal accent-2" to="/auth/register">登録</v-btn> -->
       </v-col>
 
       <v-col cols="auto">
