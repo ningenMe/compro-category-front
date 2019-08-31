@@ -10,23 +10,35 @@
     <div class="my-2" v-for="(domain,i) in domains" v-bind:key="i">
       <v-card>
         <v-toolbar color="grey darken-3" dark height="24px">
-          <v-toolbar-title>{{domain.name}}</v-toolbar-title>
+          <v-toolbar-title class="body-2">{{domain.name}}</v-toolbar-title>
         </v-toolbar>
         <div>
-          <b-table small :items="domain.problems" :fields="keys">
+          <b-table small striped :items="domain.problems" :fields="keys" :fixed="true">
+ 
             <template slot="problem" slot-scope="data">
-              <a v-bind:href="data.item.url" target="_blank">{{data.item.name}} </a>
+              <div class="body-2">
+                <a v-bind:href="data.item.url" target="_blank">{{data.item.name}} </a>
+              </div>
             </template>
+ 
             <template slot="estimation" slot-scope="data">
-              {{data.value}}
-            </template>
-            <template slot="score" slot-scope="data">
-              <div v-if="$store.getters['getAccessToken'] != null"> 
+              <div class="body-2">
+                {{data.value}}
+              </div>
+              <div v-if="$store.getters['getAccessToken'] != null" class="body-2"> 
                 <v-btn rounded color="light-green accent-3"
                 v-on:click='prepareProblemEdit(domain,data.item.id)'>編集</v-btn>
               </div>
-              <div v-else>{{data.value}}</div>
             </template>
+
+            <!-- <template slot="score" slot-scope="data">
+              <div v-if="$store.getters['getAccessToken'] != null" class="body-2"> 
+                <v-btn rounded color="light-green accent-3"
+                v-on:click='prepareProblemEdit(domain,data.item.id)'>編集</v-btn>
+              </div>
+              <div v-else class="body-2">{{data.value}}</div>
+            </template> -->
+ 
           </b-table>
         </div>
       </v-card>
@@ -66,9 +78,9 @@ export default {
       urlPrefixComproCategoryAPI : process.env.VUE_APP_URL_PREFIX_COMPRO_CATEGORY_API,
 
       keys: [
-        {key:'problem'},
-        {key:'estimation',sortable: true},
-        {key:'score'},
+        {key:'problem'   , sortable: false, thStyle: { backgroundColor: '#d8bfd8',}},
+        {key:'estimation', sortable: true , thStyle: { backgroundColor: '#d8bfd8', width: "120px", }},
+//        {key:'score'     , sortable: false, thStyle: { backgroundColor: '#d8bfd8', width: "100px", }},
       ],
     }
   },

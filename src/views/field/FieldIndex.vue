@@ -1,6 +1,6 @@
 <template>
   <v-container>
-    <div class="display-1 font-weight-black">Solved Problems</div>
+    <div class="display-1 font-weight-thin">精進記録</div>
     <v-layout row wrap>
       <v-flex xs6 v-for="(e,i) in fields" v-bind:key="i">
         <v-container class="pa-2">
