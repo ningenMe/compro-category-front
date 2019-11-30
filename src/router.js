@@ -1,5 +1,6 @@
 import Vue from 'vue'
 import Router from 'vue-router'
+import GenreIndex from './views/genre/GenreIndex.vue'
 import FieldIndex from './views/field/FieldIndex.vue'
 import FieldCreate from './views/field/FieldCreate.vue'
 import FieldEdit from './views/field/FieldEdit.vue'
@@ -18,7 +19,7 @@ export default new Router({
     base: process.env.BASE_URL,
     routes: [{
             path: '/',
-            component: FieldIndex
+            component: GenreIndex
         },
         //field
         {
