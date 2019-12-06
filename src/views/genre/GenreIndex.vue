@@ -1,6 +1,7 @@
 <template>
   <v-container>
     <div class="display-1 font-weight-thin">精進記録</div>
+    <v-btn rounded outlined color="purple darken-4" to="/tasks">問題一覧</v-btn>
     <v-layout row wrap>
       <v-flex xs6 v-for="(e,i) in genres" v-bind:key="i">
         <v-container class="pa-2">
