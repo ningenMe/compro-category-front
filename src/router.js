@@ -1,6 +1,9 @@
 import Vue from 'vue'
 import Router from 'vue-router'
 import GenreIndex from './views/genre/GenreIndex.vue'
+import TaskIndex from './views/task/TaskIndex.vue'
+
+
 import FieldIndex from './views/field/FieldIndex.vue'
 import FieldCreate from './views/field/FieldCreate.vue'
 import FieldEdit from './views/field/FieldEdit.vue'
@@ -9,6 +12,8 @@ import DomainCreate from './views/domain/DomainCreate.vue'
 import DomainEdit from './views/domain/DomainEdit.vue'
 import ProblemCreate from './views/problem/ProblemCreate.vue'
 import ProblemEdit from './views/problem/ProblemEdit.vue'
+
+
 import AuthLogin from './views/auth/AuthLogin.vue'
 import AuthRegister from './views/auth/AuthRegister'
 
@@ -20,6 +25,10 @@ export default new Router({
     routes: [{
             path: '/',
             component: GenreIndex
+        },
+        {
+            path: '/tasks',
+            component: TaskIndex
         },
         //field
         {
