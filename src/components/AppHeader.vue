@@ -6,7 +6,7 @@
           <b-navbar-nav class="ml-auto">
             
             <b-navbar-nav right>
-              <b-nav-item target="_blank" href="https://ningenme.net"><span class="linkline">nngenMe.net</span></b-nav-item>
+              <b-nav-item target="_blank" href="https://ningenme.net"><span class="linkline">ningenMe.net</span></b-nav-item>
             </b-navbar-nav>
 
             <b-nav-item-dropdown text="Github" right>
