@@ -1,35 +1,34 @@
 <template>
   <v-container>
-    <div class="display-1 font-weight-thin">精進記録</div>
-    <v-btn rounded outlined color="purple darken-4" to="/tasks">問題一覧</v-btn>
+
     <v-layout row wrap>
       <v-flex xs6 v-for="(e,i) in genres" v-bind:key="i">
         <v-container class="pa-2">
           <v-card>
             <v-card-text>
-              <v-btn text small block v-on:click='prepareDomainIndex(e)'>{{e.name}}</v-btn>
+              <v-btn text small block v-bind:to="'/genres/' + e.label + '/topics'">{{e.name}}</v-btn>
             </v-card-text>
           </v-card>
         </v-container>
-        <!-- <v-btn rounded color="light-green accent-3" v-bind:to = "'/field/edit/' + e.label" v-if="$store.getters['getAccessToken'] != null">編集</v-btn> -->
+        <v-btn rounded color="light-green accent-3" v-bind:to = "'/genres/' + e.label + '/edit'" v-if="$store.getters['getAccessToken'] != null">編集</v-btn>
 
       </v-flex>
     </v-layout>
 
-    <!-- <v-row>
+    <v-row>
       <v-col
         cols="auto"
         class="mr-auto"
       >
         <v-btn rounded color="teal accent-2" to="/auth/login">ログイン</v-btn>
-        <v-btn rounded color="teal accent-2" to="/auth/register">登録</v-btn>
+        <v-btn rounded color="teal accent-2" to="/auth/register">ユーザ登録</v-btn>
       </v-col>
 
       <v-col cols="auto">
-        <v-btn rounded color="light-blue accent-2" to="/field/create" v-if="this.$store.getters['getAccessToken'] != null">追加</v-btn>
+        <v-btn rounded color="light-blue accent-2" to="/genres/create" v-if="this.$store.getters['getAccessToken'] != null">genre追加</v-btn>
       </v-col>
 
-    </v-row> -->
+    </v-row>
   </v-container>
 </template>
 
@@ -52,11 +51,5 @@ export default {
       .get(this.urlPrefixComproCategoryAPI + '/genres')
       .then(response => (this.genres = response.data))
   },
-  // methods : {
-  //   prepareDomainIndex(field){
-  //     this.$store.dispatch('setField', field)
-  //     this.$router.push('/domain/index/'+field.label)
-  //   }
-  // }
 }
 </script>
