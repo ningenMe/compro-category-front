@@ -17,6 +17,7 @@
             <b-nav-item-dropdown text="Compro" right>
               <b-dropdown-item target="_blank" href="https://atcoder.jp/users/ningenMe"><span class="linkline">AtCoder</span></b-dropdown-item>
               <b-dropdown-item target="_blank" href="https://codeforces.com/profile/ningenMe"><span class="linkline">Codeforces</span></b-dropdown-item>
+              <b-dropdown-item target="_blank" href="https://yukicoder.me/users/4145"><span class="linkline">yukicoder</span></b-dropdown-item>
               <b-dropdown-item target="_blank" href="https://csacademy.com/user/ningenMe"><span class="linkline">CSAcademy</span></b-dropdown-item>            
             </b-nav-item-dropdown>
             
