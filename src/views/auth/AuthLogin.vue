@@ -26,7 +26,7 @@
           cols="auto"
           class="mr-auto"
         >
-          <v-btn rounded color="deep-purple lighten-4" to="/field/index">もどる</v-btn>
+          <v-btn rounded color="deep-purple lighten-4" to="/">もどる</v-btn>
         </v-col>
 
 
@@ -60,7 +60,7 @@ export default {
     authLogin : function (event) {
 
       axios({
-        url: this.urlPrefixComproCategoryAPI + '/api/login',
+        url: this.urlPrefixComproCategoryAPI + '/login',
         method: 'post',
         data: {
           'email': this.email,
@@ -73,13 +73,13 @@ export default {
     authCheck : function (event) {
 
       axios({
-        url: this.urlPrefixComproCategoryAPI + '/api/me',
+        url: this.urlPrefixComproCategoryAPI + '/me',
         method: 'get',
         headers: {
                    "Authorization" : "Bearer " + this.$store.getters['getAccessToken'], 
         },
       }).then(response => (this.response = response.data))
-      this.$router.push('/field/index')
+      this.$router.push('/')
     }
 
   }
