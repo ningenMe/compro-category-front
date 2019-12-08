@@ -1,12 +1,22 @@
 <template>
   <v-container>
-    <div class="display-1">Create New Domain!!!</div>
+    <div class="display-1">Create Topic</div>
       <v-form
       ref="form"
       lazy-validation
       >
+          <v-select
+            v-model="value"
+            :items="items"
+            chips
+            label="Chips"
+            multiple
+            outlined
+          ></v-select>
+
+
         <v-text-field
-          v-model="field.name"
+          v-model="genre.name"
           :counter="255"
           label="field"
           outlined
@@ -35,11 +45,11 @@
           cols="auto"
           class="mr-auto"
         >
-          <v-btn rounded color="deep-purple lighten-4" v-bind:to="'/domain/index/'+field.label">もどる</v-btn>
+          <v-btn rounded color="deep-purple lighten-4" v-bind:to="'/topics/'">return</v-btn>
         </v-col>
 
         <v-col cols="auto">
-          <v-btn rounded color="light-blue accent-2" v-on:click="domainCreate">送信</v-btn>
+          <v-btn rounded color="light-blue accent-2" v-on:click="topicCreate">create</v-btn>
         </v-col>
       </v-row>
 
@@ -51,30 +61,45 @@ import axios from 'axios';
 export default {
   data () {
     return {
-      field    : this.$store.getters['getField'],
+      genres   : [],
+      genre_labels : [],
+      items: ['foo', 'bar', 'fizz', 'buzz'],
+      value: [],
+      genre    : this.$store.getters['getGenre'],
       name     : null,
       order    : null,
-      json     : null,
       response : [],
       urlPrefixComproCategoryAPI : process.env.VUE_APP_URL_PREFIX_COMPRO_CATEGORY_API,
     }
   },
+  mounted () {
+    axios
+      .get(this.urlPrefixComproCategoryAPI + '/genres')
+      .then(response => (this.genres = response.data))
+  },
+  watch : {
+    genres: function() {
+      for (var i=0; i<this.genres.length; i++){
+        genre_labels[i] = genres[i].label;
+      }
+    }
+  },
   methods : {
-    domainCreate : function (event) {
+    topicCreate : function (event) {
       axios({
-        url: this.urlPrefixComproCategoryAPI + '/api/domains/create',
+        url: this.urlPrefixComproCategoryAPI + '/topics/create',
         method: 'post',
         headers: {
                    "Authorization" : "Bearer " + this.$store.getters['getAccessToken'], 
         },
         data: {
-          'fields_id': this.field.id,
+          'genre_id' : this.genre.genre_id,
           'name'     : this.name,
           'order'    : this.order, 
         }
       }).then(response => (
         this.response = response.data))
-        this.$router.push('/domain/index/'+this.field.label)
+        this.$router.push('/topics')
     }
   }
 }

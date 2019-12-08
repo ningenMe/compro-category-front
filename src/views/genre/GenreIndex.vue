@@ -1,34 +1,43 @@
 <template>
   <v-container>
-
-    <v-layout row wrap>
-      <v-flex xs6 v-for="(e,i) in genres" v-bind:key="i">
-        <v-container class="pa-2">
-          <v-card>
-            <v-card-text>
-              <v-btn text small block v-bind:to="'/genres/' + e.label + '/topics'">{{e.name}}</v-btn>
-            </v-card-text>
-          </v-card>
-        </v-container>
-        <v-btn rounded color="light-green accent-3" v-bind:to = "'/genres/' + e.label + '/edit'" v-if="$store.getters['getAccessToken'] != null">編集</v-btn>
-
-      </v-flex>
-    </v-layout>
-
+  
+    <!-- edit,create button -->
     <v-row>
       <v-col
         cols="auto"
         class="mr-auto"
       >
-        <v-btn rounded color="teal accent-2" to="/auth/login">ログイン</v-btn>
-        <v-btn rounded color="teal accent-2" to="/auth/register">ユーザ登録</v-btn>
+        <v-btn outlined color="yellow darken-3" disabled v-if="$store.getters['getAccessToken'] != null">genre</v-btn>
+        <v-btn outlined color="yellow darken-3" v-if="$store.getters['getAccessToken'] != null">
+        <select v-model="selected_label">
+          <option v-for="(genre,i) in genres" v-bind:key="i">
+            {{ genre.label}}
+          </option>
+        </select>
+        ▼
+        </v-btn>
+        <v-btn outlined color="yellow darken-3" v-bind:to = "'/genres/' + selected_label + '/edit'" v-if="$store.getters['getAccessToken'] != null">edit</v-btn>
       </v-col>
 
       <v-col cols="auto">
-        <v-btn rounded color="light-blue accent-2" to="/genres/create" v-if="this.$store.getters['getAccessToken'] != null">genre追加</v-btn>
+        <v-btn outlined color="light-blue accent-4" to="/genres/create" v-if="this.$store.getters['getAccessToken'] != null">genre create</v-btn>
       </v-col>
 
     </v-row>
+
+    <!-- genre index -->
+    <v-layout row wrap>
+      <v-flex xs6 v-for="(genre,i) in genres" v-bind:key="i">
+        <v-container class="pa-2">
+          <v-card>
+            <v-card-text>
+              <v-btn text small block v-bind:to="'/genres/' + genre.label + '/topics'">{{genre.name}}</v-btn>
+            </v-card-text>
+          </v-card>
+        </v-container>
+      </v-flex>
+    </v-layout>
+
   </v-container>
 </template>
 
@@ -39,6 +48,7 @@ export default {
   data () {
     return {
       genres : [],
+      selected_label: 'search',
       urlPrefixComproCategoryAPI : process.env.VUE_APP_URL_PREFIX_COMPRO_CATEGORY_API,
     }
   },

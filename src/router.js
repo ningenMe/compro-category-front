@@ -6,6 +6,7 @@ import GenreEdit from './views/genre/GenreEdit.vue'
 import GenreDetail from './views/genre/GenreDetail.vue'
 import TopicIndex from './views/topic/TopicIndex.vue'
 import TopicDetail from './views/topic/TopicDetail.vue'
+import TopicCreate from './views/topic/TopicCreate.vue'
 import TaskIndex from './views/task/TaskIndex.vue'
 import TaskDetail from './views/task/TaskDetail.vue'
 
@@ -55,6 +56,10 @@ export default new Router({
         {
             path: '/topics',
             component: TopicIndex
+        },
+        {
+            path: '/topics/create',
+            component: TopicCreate
         },
         {
             path: '/topics/:topic_id/tasks',

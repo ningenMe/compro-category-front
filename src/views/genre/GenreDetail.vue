@@ -1,5 +1,31 @@
 <template>
   <v-container>
+
+    <!-- edit,create button -->
+    <v-row>
+      <v-col
+        cols="auto"
+        class="mr-auto"
+      >
+        <!-- <v-btn outlined color="yellow darken-3" disabled v-if="$store.getters['getAccessToken'] != null">genre</v-btn>
+        <v-btn outlined color="yellow darken-3" v-if="$store.getters['getAccessToken'] != null">
+        <select v-model="selected_label">
+          <option v-for="(genre,i) in genres" v-bind:key="i">
+            {{ genre.label}}
+          </option>
+        </select>
+        ▼
+        </v-btn>
+        <v-btn outlined color="yellow darken-3" v-bind:to = "'/genres/' + selected_label + '/edit'" v-if="$store.getters['getAccessToken'] != null">edit</v-btn> -->
+      </v-col>
+
+      <v-col cols="auto">
+        <!-- <v-btn block outlined color="light-blue accent-2" v-on:click='prepareTopicCreate()' v-if="this.$store.getters['getAccessToken'] != null">topic create</v-btn> -->
+        <v-btn block outlined color="light-blue accent-2" v-on:click='prepareTopicCreate()'>topic create</v-btn>
+      </v-col>
+
+    </v-row>
+
     <!-- topic名 -->
     <v-card class="my-4" color="secondary" dark>
       <div class="text-center">
@@ -61,5 +87,17 @@ export default {
       })
       .then(response => (this.genre = response.data))
   },
+  methods : {
+    prepareTopicCreate(){
+      //genreをそのままvuexに渡すと無駄な情報が多いので引数を成形する
+      var genreArg = {
+        'genre_id' : this.genre.genre_id,
+        'label'    : this.genre.label,
+        'name'     : this.genre.name
+      }
+      this.$store.dispatch('setGenre', genreArg)
+      this.$router.push('/topics/create')
+    }
+  }
 }
 </script>

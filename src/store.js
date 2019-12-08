@@ -5,6 +5,9 @@ Vue.use(Vuex)
 
 export default new Vuex.Store({
     state: {
+        genre: {},
+        genres: [],
+        topic: {},
         fields: [],
         field: {},
         domain: {},
@@ -12,6 +15,16 @@ export default new Vuex.Store({
         accessToken: null,
     },
     getters: {
+        getGenre(state) {
+            return state.genre;
+        },
+        getGenres(state) {
+            return state.genres;
+        },
+
+        getTopic(state) {
+            return state.topic;
+        },
         getFields(state) {
             return state.fields;
         },
@@ -29,6 +42,17 @@ export default new Vuex.Store({
         },
     },
     mutations: {
+        setGenre(state, payload) {
+            state.genre = payload;
+        },
+        setGenres(state, payload) {
+            state.genres = payload;
+        },
+
+
+        setTopic(state, payload) {
+            state.topic = payload;
+        },
         setFields(state, payload) {
             state.fields = payload;
         },
@@ -46,6 +70,16 @@ export default new Vuex.Store({
         },
     },
     actions: {
+        setGenre(context, genre) {
+            context.commit('setGenre', genre)
+        },
+        setGenres(context, genres) {
+            context.commit('setGenres', genres)
+        },
+
+        setTopic(context, topic) {
+            context.commit('setTopic', topic)
+        },
         setFields(context, fields) {
             context.commit('setFields', fields)
         },

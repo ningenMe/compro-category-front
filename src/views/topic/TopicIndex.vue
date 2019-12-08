@@ -4,11 +4,11 @@
       <b-table small striped :items="topics" :fields="keys" :fixed="true">
         <!-- genreカラム -->
         <template slot="genre" slot-scope="data">
-          <router-link v-bind:to="'/genres/' + data.item.label + '/topics'">{{data.item.genre_name}}</router-link>
+          <v-chip rounded outlined dark color="cyan darken-4" small v-bind:to="'genres/' + data.item.label + '/topics'">{{data.item.genre_name}}</v-chip>
         </template>
         <!-- topicカラム -->
         <template slot="topic" slot-scope="data">
-          <router-link v-bind:to="'/topics/' + data.item.topic_id + '/tasks'">{{data.item.topic_name}}</router-link>
+          <v-chip rounded outlined dark color="secondary" small v-bind:to="'topics/' + data.item.topic_id + '/tasks'">{{data.item.topic_name}}</v-chip>
         </template>
       </b-table>
     </v-card>
