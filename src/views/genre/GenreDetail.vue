@@ -7,21 +7,23 @@
         cols="auto"
         class="mr-auto"
       >
-        <!-- <v-btn outlined color="yellow darken-3" disabled v-if="$store.getters['getAccessToken'] != null">genre</v-btn>
-        <v-btn outlined color="yellow darken-3" v-if="$store.getters['getAccessToken'] != null">
-        <select v-model="selected_label">
-          <option v-for="(genre,i) in genres" v-bind:key="i">
-            {{ genre.label}}
+        <v-btn outlined color="yellow darken-3" disabled >topic</v-btn>
+        <v-btn outlined color="yellow darken-3">
+        <select v-model="selected_topic">
+          <option v-bind:value="topic" v-for="(topic,i) in genre.topics" v-bind:key="i">
+            {{ topic.topic_name}}
           </option>
         </select>
         ▼
         </v-btn>
-        <v-btn outlined color="yellow darken-3" v-bind:to = "'/genres/' + selected_label + '/edit'" v-if="$store.getters['getAccessToken'] != null">edit</v-btn> -->
+        <v-btn outlined color="yellow darken-3" v-bind:to = "'/topics/' + selected_topic.topic_id + '/edit'" v-if="$store.getters['getAccessToken'] != null">edit</v-btn>
+        <v-btn outlined color="yellow darken-3" v-bind:to = "'/topics/' + selected_topic.topic_id + '/tasks'" v-if="$store.getters['getAccessToken'] == null">tasks</v-btn>
+
       </v-col>
 
       <v-col cols="auto">
         <!-- <v-btn block outlined color="light-blue accent-2" v-on:click='prepareTopicCreate()' v-if="this.$store.getters['getAccessToken'] != null">topic create</v-btn> -->
-        <v-btn block outlined color="light-blue accent-2" v-on:click='prepareTopicCreate()'>topic create</v-btn>
+        <v-btn outlined color="light-blue accent-2" v-on:click='prepareTopicCreate()' v-if="$store.getters['getAccessToken'] != null">topic create</v-btn>
       </v-col>
 
     </v-row>
@@ -72,6 +74,7 @@ export default {
   data () {
     return {
       genre : [],
+      selected_topic: [],
       urlPrefixComproCategoryAPI : process.env.VUE_APP_URL_PREFIX_COMPRO_CATEGORY_API,
       keys: [
         {key:'task'      , sortable: false, thStyle: { backgroundColor: '#d8bfd8',}},

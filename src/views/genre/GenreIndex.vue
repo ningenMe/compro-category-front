@@ -7,8 +7,8 @@
         cols="auto"
         class="mr-auto"
       >
-        <v-btn outlined color="yellow darken-3" disabled v-if="$store.getters['getAccessToken'] != null">genre</v-btn>
-        <v-btn outlined color="yellow darken-3" v-if="$store.getters['getAccessToken'] != null">
+        <v-btn outlined color="yellow darken-3" disabled >genre</v-btn>
+        <v-btn outlined color="yellow darken-3">
         <select v-model="selected_label">
           <option v-for="(genre,i) in genres" v-bind:key="i">
             {{ genre.label}}
@@ -17,6 +17,7 @@
         ▼
         </v-btn>
         <v-btn outlined color="yellow darken-3" v-bind:to = "'/genres/' + selected_label + '/edit'" v-if="$store.getters['getAccessToken'] != null">edit</v-btn>
+        <v-btn outlined color="yellow darken-3" v-bind:to = "'/genres/' + selected_label + '/topics'" v-if="$store.getters['getAccessToken'] == null">topics</v-btn>
       </v-col>
 
       <v-col cols="auto">

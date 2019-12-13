@@ -6,22 +6,14 @@
       lazy-validation
       >
           <v-select
-            v-model="value"
-            :items="items"
-            chips
-            label="Chips"
-            multiple
+            v-model="genre"
+            item-text="label"
+            item-value="label"
+            :items="genres"
+            label="label"
             outlined
+            return-object
           ></v-select>
-
-
-        <v-text-field
-          v-model="genre.name"
-          :counter="255"
-          label="field"
-          outlined
-          readonly
-        ></v-text-field>
 
         <v-text-field
           v-model="name"
@@ -62,9 +54,10 @@ export default {
   data () {
     return {
       genres   : [],
-      genre_labels : [],
-      items: ['foo', 'bar', 'fizz', 'buzz'],
-      value: [],
+      items: [
+        {label:'foo', value:'bar'},
+        {label:'fizz',value:'buzz'}
+      ],
       genre    : this.$store.getters['getGenre'],
       name     : null,
       order    : null,
@@ -77,17 +70,10 @@ export default {
       .get(this.urlPrefixComproCategoryAPI + '/genres')
       .then(response => (this.genres = response.data))
   },
-  watch : {
-    genres: function() {
-      for (var i=0; i<this.genres.length; i++){
-        genre_labels[i] = genres[i].label;
-      }
-    }
-  },
   methods : {
     topicCreate : function (event) {
       axios({
-        url: this.urlPrefixComproCategoryAPI + '/topics/create',
+        url: this.urlPrefixComproCategoryAPI + '/topics',
         method: 'post',
         headers: {
                    "Authorization" : "Bearer " + this.$store.getters['getAccessToken'], 
