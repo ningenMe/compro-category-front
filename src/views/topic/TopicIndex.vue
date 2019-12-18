@@ -17,13 +17,13 @@
         </select>
         ▼
         </v-btn>
-        <v-btn outlined color="yellow darken-3" v-bind:to = "'/topics/' + selected_topic.topic_id + '/edit'" v-if="$store.getters['getAccessToken'] != null">edit</v-btn>
+        <v-btn outlined color="yellow darken-3" v-on:click='prepareTopicEdit(selected_topic)' v-if="$store.getters['getAccessToken'] != null">edit</v-btn>
+        <!-- <v-btn outlined color="yellow darken-3" v-bind:to = "'/topics/' + selected_topic.topic_id + '/edit'" v-if="$store.getters['getAccessToken'] != null">edit</v-btn> -->
         <v-btn outlined color="yellow darken-3" v-bind:to = "'/topics/' + selected_topic.topic_id + '/tasks'" v-if="$store.getters['getAccessToken'] == null">tasks</v-btn>
 
       </v-col>
 
       <v-col cols="auto">
-        <!-- <v-btn block outlined color="light-blue accent-2" v-on:click='prepareTopicCreate()' v-if="this.$store.getters['getAccessToken'] != null">topic create</v-btn> -->
         <v-btn outlined color="light-blue accent-4" to='/topics/create' v-if="this.$store.getters['getAccessToken'] != null">topic create</v-btn>
       </v-col>
 
@@ -67,5 +67,12 @@ export default {
       .get(this.urlPrefixComproCategoryAPI + '/topics')
       .then(response => (this.topics = response.data))
   },
+  methods : {
+    prepareTopicEdit(topic){
+      this.$store.dispatch('setTopic',topic)
+      this.$router.push('/topics/' + topic.topic_id + '/edit')
+    }
+  }
+
 }
 </script>
