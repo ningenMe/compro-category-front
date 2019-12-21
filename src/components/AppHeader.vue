@@ -6,7 +6,7 @@
           <b-navbar-nav class="ml-auto">
             
             <b-navbar-nav right>
-              <b-nav-item target="_blank" href="https://ningenme.net"><span class="linkline">nngenMe.net</span></b-nav-item>
+              <b-nav-item target="_blank" href="https://ningenme.net"><span class="linkline">ningenMe.net</span></b-nav-item>
             </b-navbar-nav>
 
             <b-nav-item-dropdown text="Github" right>
@@ -17,6 +17,7 @@
             <b-nav-item-dropdown text="Compro" right>
               <b-dropdown-item target="_blank" href="https://atcoder.jp/users/ningenMe"><span class="linkline">AtCoder</span></b-dropdown-item>
               <b-dropdown-item target="_blank" href="https://codeforces.com/profile/ningenMe"><span class="linkline">Codeforces</span></b-dropdown-item>
+              <b-dropdown-item target="_blank" href="https://yukicoder.me/users/4145"><span class="linkline">yukicoder</span></b-dropdown-item>
               <b-dropdown-item target="_blank" href="https://csacademy.com/user/ningenMe"><span class="linkline">CSAcademy</span></b-dropdown-item>            
             </b-nav-item-dropdown>
             
