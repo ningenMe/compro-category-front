@@ -10,7 +10,8 @@ import TopicCreate from './views/topic/TopicCreate.vue'
 import TopicEdit from './views/topic/TopicEdit.vue'
 import TaskIndex from './views/task/TaskIndex.vue'
 import TaskDetail from './views/task/TaskDetail.vue'
-
+import TaskCreate from './views/task/TaskCreate.vue'
+import TaskEdit from './views/task/TaskEdit.vue'
 
 import FieldIndex from './views/field/FieldIndex.vue'
 import FieldCreate from './views/field/FieldCreate.vue'
@@ -76,8 +77,16 @@ export default new Router({
             component: TaskIndex
         },
         {
+            path: '/tasks/create',
+            component: TaskCreate
+        },
+        {
             path: '/tasks/:task_id',
             component: TaskDetail
+        },
+        {
+            path: '/tasks/:task_id/edit',
+            component: TaskEdit
         },
 
 

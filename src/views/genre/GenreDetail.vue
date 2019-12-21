@@ -16,7 +16,7 @@
         </select>
         ▼
         </v-btn>
-        <v-btn outlined color="yellow darken-3" v-bind:to = "'/topics/' + selected_topic.topic_id + '/edit'" v-if="$store.getters['getAccessToken'] != null">edit</v-btn>
+        <v-btn outlined color="yellow darken-3" v-on:click='prepareTopicEdit(selected_topic)' v-if="$store.getters['getAccessToken'] != null">edit</v-btn>
         <v-btn outlined color="yellow darken-3" v-bind:to = "'/topics/' + selected_topic.topic_id + '/tasks'" v-if="$store.getters['getAccessToken'] == null">tasks</v-btn>
 
       </v-col>
@@ -100,6 +100,10 @@ export default {
       }
       this.$store.dispatch('setGenre', genreArg)
       this.$router.push('/topics/create')
+    },
+    prepareTopicEdit(topic){
+      this.$store.dispatch('setTopic', topic)
+      this.$router.push('/topics/' + topic.topic_id + '/edit')
     }
   }
 }

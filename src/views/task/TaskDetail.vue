@@ -1,6 +1,21 @@
 <template>
   <v-container>
+    <!-- edit,create button -->
+    <v-row>
+      <v-col
+        cols="auto"
+        class="mr-auto"
+      >
+        <v-btn outlined color="yellow darken-3" v-bind:to = "'/tasks/' + tasks[0].task_id + '/edit'" v-if="$store.getters['getAccessToken'] != null">edit</v-btn>
+
+      </v-col>
+      <v-col cols="auto">
+      </v-col>
+
+    </v-row>
+
     <v-layout row wrap>
+
       <b-table small striped :items="tasks" :fields="keys" :fixed="true">
 
         <!-- taskカラム -->
@@ -51,7 +66,7 @@ export default {
   mounted () {
     axios
       .get(this.urlPrefixComproCategoryAPI + '/tasks/' + this.$route.params.task_id)
-      .then(response => (this.tasks = response.data))
+      .then(response => (this.tasks.push(response.data) ))
   },
 }
 </script>

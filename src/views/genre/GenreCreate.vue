@@ -1,6 +1,6 @@
 <template>
   <v-container>
-    <div class="display-1">Create New Field!!!</div>
+    <div class="display-1">Create Genre</div>
       <v-form
       ref="form"
       lazy-validation
@@ -35,11 +35,11 @@
           cols="auto"
           class="mr-auto"
         >
-          <v-btn rounded color="deep-purple lighten-4" to="/">もどる</v-btn>
+          <v-btn rounded color="deep-purple lighten-4" to="/">return</v-btn>
         </v-col>
 
         <v-col cols="auto">
-          <v-btn rounded color="light-blue accent-2" v-on:click="genreCreate">送信</v-btn>
+          <v-btn rounded color="light-blue accent-2" v-on:click="genreCreate">create</v-btn>
         </v-col>
       </v-row>
 

@@ -1,6 +1,5 @@
 <template>
   <v-container>
-  
     <!-- edit,create button -->
     <v-row>
       <v-col
@@ -9,15 +8,15 @@
       >
         <v-btn outlined color="yellow darken-3" disabled >genre</v-btn>
         <v-btn outlined color="yellow darken-3">
-        <select v-model="selected_label">
-          <option v-for="(genre,i) in genres" v-bind:key="i">
-            {{ genre.label}}
+        <select v-model="selected_genre">
+          <option v-bind:value="genre" v-for="(genre,i) in genres" v-bind:key="i">
+            {{ genre.name}}
           </option>
         </select>
         ▼
         </v-btn>
-        <v-btn outlined color="yellow darken-3" v-bind:to = "'/genres/' + selected_label + '/edit'" v-if="$store.getters['getAccessToken'] != null">edit</v-btn>
-        <v-btn outlined color="yellow darken-3" v-bind:to = "'/genres/' + selected_label + '/topics'" v-if="$store.getters['getAccessToken'] == null">topics</v-btn>
+        <v-btn outlined color="yellow darken-3" v-bind:to = "'/genres/' + selected_genre.label + '/edit'" v-if="$store.getters['getAccessToken'] != null">edit</v-btn>
+        <v-btn outlined color="yellow darken-3" v-bind:to = "'/genres/' + selected_genre.label + '/topics'" v-if="$store.getters['getAccessToken'] == null">topics</v-btn>
       </v-col>
 
       <v-col cols="auto">
@@ -49,7 +48,7 @@ export default {
   data () {
     return {
       genres : [],
-      selected_label: 'search',
+      selected_genre: 'search',
       urlPrefixComproCategoryAPI : process.env.VUE_APP_URL_PREFIX_COMPRO_CATEGORY_API,
     }
   },
