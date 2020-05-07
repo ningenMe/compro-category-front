@@ -10,8 +10,8 @@
             </b-navbar-nav>
 
             <b-nav-item-dropdown text="Github" right>
-              <b-dropdown-item target="_blank" href="https://github.com/ningenMe/ComproCategory.UI"><span class="linkline">ComproCategory.UI</span></b-dropdown-item>
-              <b-dropdown-item target="_blank" href="https://github.com/ningenMe/ComproCategory.API"><span class="linkline">ComproCategory.API</span></b-dropdown-item>
+              <b-dropdown-item target="_blank" href="https://github.com/ningenMe/compro-category-front"><span class="linkline">compro-category-front</span></b-dropdown-item>
+              <b-dropdown-item target="_blank" href="https://github.com/ningenMe/ComproCategory.API"><span class="linkline">compro-category-api</span></b-dropdown-item>
             </b-nav-item-dropdown>
            
             <b-nav-item-dropdown text="Compro" right>
