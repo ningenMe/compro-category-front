@@ -8,17 +8,17 @@
         <b-table small striped :items="topic.tasks" :fields="keys" :fixed="true">
 
           <!-- taskカラム -->
-          <template slot="task" slot-scope="data">
+          <template v-slot:cell(task)="data">
               <router-link v-bind:to="'/tasks/' + data.item.task_id" class="body-2">{{data.item.name}}</router-link>
           </template>
 
           <!-- urlカラム -->
-          <template slot="url" slot-scope="data">
+          <template v-slot:cell(url)="data">
               <a v-bind:href="data.item.url" target="_blank" class="body-2">#</a>
           </template>
 
           <!-- estimationカラム -->
-          <template slot="estimation" slot-scope="data">
+          <template v-slot:cell(estimation)="data">
             <div class="body-2"> {{data.value}}</div>
           </template>
           
