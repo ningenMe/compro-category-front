@@ -1,11 +1,33 @@
-# compro-category-front
+![](https://github.com/ningenMe/compro-category-front/workflows/deploy/badge.svg)  
+## compro-category-front
+
+### これは何？
+https://compro-category.ningenme.net のフロントエンド
+
+
+#### アーキテクチャ
+|            |                |
+|----------- |--------------- |
+|rooting     | Cloud Front    |
+|hosting     | S3             |
+|ci/cd       | github actions |
+|application | Vue            |
+
+#### ローカルで実行するとき
+```
+yarn start
+```
+#### ビルドするとき
+```
+yarn build
+```
+
 
 ## エントリポイント
 
-|  | | 
-|---|---|
-| hostname |nongenme.net   |
-| path  | /compro_category |
+|          |                               |  
+|----------|-------------------------------|
+| hostname |compro-category.ningenme.net   |
 
 |  TEXT|METHOD  |URI  |AUTH|
 |---|---|---|---|
@@ -22,33 +44,3 @@
 | task詳細  |GET  |/tasks/:task_id  ||
 | task作成  |GET  |/tasks/create  |NEED|
 | task編集  |GET  |/tasks/:task_id/edit  |NEED|
-
-
-
-## Project setup
-```
-npm install
-```
-
-### Compiles and hot-reloads for development
-```
-npm run serve
-```
-
-### Compiles and minifies for production
-```
-npm run build
-```
-
-### Run your tests
-```
-npm run test
-```
-
-### Lints and fixes files
-```
-npm run lint
-```
-
-### Customize configuration
-See [Configuration Reference](https://cli.vuejs.org/config/).
