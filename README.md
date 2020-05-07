@@ -1,4 +1,4 @@
-# comprocategory.ui
+# compro-category-front
 
 ## エントリポイント
 
