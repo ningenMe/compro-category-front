@@ -53,10 +53,6 @@ export default {
     }
   },
   mounted () {
-    axios.post('https://ningenme.net/home.api/access',{
-      'name':'compro_category'
-    })
-
     axios
       .get(this.urlPrefixComproCategoryAPI + '/genres')
       .then(response => (this.genres = response.data))
