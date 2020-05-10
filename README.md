@@ -6,7 +6,6 @@ https://compro-category.ningenme.net のフロントエンド
 
 
 #### アーキテクチャ
-|            |                |
 |----------- |--------------- |
 |rooting     | Cloud Front    |
 |hosting     | S3             |
