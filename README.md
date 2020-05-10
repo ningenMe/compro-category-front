@@ -24,7 +24,6 @@ yarn build
 
 ## エントリポイント
 
-|          |                               |  
 |----------|-------------------------------|
 | hostname |compro-category.ningenme.net   |
 
