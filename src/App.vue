@@ -2,6 +2,7 @@
   <v-app>
     <AppHeader/>
     <IndexButton/>
+    <Notification/>
     <router-view/>
     <LoginStatus/>
     <AppFooter/>
@@ -13,9 +14,10 @@ import AppHeader from './components/AppHeader'
 import AppFooter from './components/AppFooter'
 import LoginStatus from './components/LoginStatus'
 import IndexButton from './components/IndexButton'
+import Notification from './components/Notification'
 
 export default {
-  components: { AppHeader,AppFooter,LoginStatus,IndexButton },
+  components: { AppHeader,AppFooter,LoginStatus,IndexButton,Notification },
 }
 </script>
 

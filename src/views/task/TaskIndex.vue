@@ -11,13 +11,13 @@
         <v-btn outlined color="yellow darken-3">
         <select v-model="task">
           <option v-bind:value="task" v-for="(task,i) in tasks" v-bind:key="i">
-            {{ task.name}}
+            {{ task.taskName}}
           </option>
         </select>
         ▼
         </v-btn>
-        <v-btn outlined color="yellow darken-3" v-bind:to = "'/tasks/' + task.task_id + '/edit'" v-if="$store.getters['getAccessToken'] != null">edit</v-btn>
-        <v-btn outlined color="yellow darken-3" v-bind:to = "'/tasks/' + task.task_id" v-if="$store.getters['getAccessToken'] == null">tasks</v-btn>
+        <v-btn outlined color="yellow darken-3" v-bind:to = "'/tasks/' + task.taskId + '/edit'" v-if="$store.getters['getAccessToken'] != null">edit</v-btn>
+        <v-btn outlined color="yellow darken-3" v-bind:to = "'/tasks/' + task.taskId" v-if="$store.getters['getAccessToken'] == null">tasks</v-btn>
 
       </v-col>
       <v-col cols="auto">
@@ -33,13 +33,12 @@
         <!-- taskカラム -->
         <template v-slot:cell(task)="data">
           <div class="body-2">
-            <router-link v-bind:to="'/tasks/' + data.item.task_id" class="body-2">{{data.item.name}}</router-link>
+            <router-link v-bind:to="'/tasks/' + data.item.taskId" class="body-2">{{data.item.taskName}}</router-link>
             
-            <br/>
-            
-            <a class="my-2" v-for="(tag,i) in data.item.tags" v-bind:key="i">
-              <v-chip rounded outlined dark color="secondary" small v-bind:to="'topics/' + tag.topic_id + '/tasks'">{{tag.topic_name}}</v-chip>
-            </a>
+        <!--            <br/>  -->      
+        <!--    <a class="my-2" v-for="(tag,i) in data.item.tags" v-bind:key="i">-->
+        <!--      <v-chip rounded outlined dark color="secondary" small v-bind:to="'topics/' + tag.topic_id + '/tasks'">{{tag.topic_name}}</v-chip>-->
+        <!--    </a>-->
           </div>
         </template>
 
@@ -68,7 +67,8 @@ export default {
     return {
       tasks : [],
       task  : [],
-      urlPrefixComproCategoryAPI : process.env.VUE_APP_URL_PREFIX_COMPRO_CATEGORY_API,
+      host : process.env.VUE_APP_NINGENME_API_HOST,
+      path : process.env.VUE_APP_NINGENME_API_PATH,
       keys: [
         {key:'task'      , sortable: false, thStyle: { backgroundColor: '#d8bfd8',}},
         {key:'url'       , sortable: false, thStyle: { backgroundColor: '#d8bfd8', width: "30px", }},
@@ -79,8 +79,9 @@ export default {
   },
   mounted () {
     axios
-      .get(this.urlPrefixComproCategoryAPI + '/tasks')
-      .then(response => (this.tasks = response.data))
+      .get(this.host + this.path + '/tasks')
+      .then(response => (this.tasks = response.data.comproCategoryTaskList))
+      .catch(err => {console.log('err:', err);})
   },
 }
 </script>
