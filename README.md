@@ -6,11 +6,12 @@ https://compro-category.ningenme.net のフロントエンド
 
 
 #### アーキテクチャ
-|----------- |--------------- |
-|rooting     | Cloud Front    |
-|hosting     | S3             |
-|ci/cd       | github actions |
-|application | Vue            |
+|            |                |
+|----------- |--------------- |  
+|rooting     | Cloud Front    |  
+|hosting     | S3             |  
+|ci/cd       | github actions |  
+|application | Vue            |  
 
 #### ローカルで実行するとき
 ```
@@ -21,9 +22,8 @@ yarn start
 yarn build
 ```
 
-
 ## エントリポイント
-
+|          |                               |
 |----------|-------------------------------|
 | hostname |compro-category.ningenme.net   |
 
