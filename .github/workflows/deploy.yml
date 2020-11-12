@@ -19,11 +19,11 @@ jobs:
     steps:
     - uses: actions/checkout@v2
 
-    - name: set-api
-      env: 
-        API_ENDPOINT: ${{ secrets.API_ENDPOINT }}
-      run: |
-        echo VUE_APP_URL_PREFIX_COMPRO_CATEGORY_API=\"$API_ENDPOINT\" >> .env
+    # - name: set-api
+    #   env: 
+    #     API_ENDPOINT: ${{ secrets.API_ENDPOINT }}
+    #   run: |
+    #     echo VUE_APP_URL_PREFIX_COMPRO_CATEGORY_API=\"$API_ENDPOINT\" >> .env
 
     - name: Use Node.js ${{ matrix.node-version }}
       uses: actions/setup-node@v1
