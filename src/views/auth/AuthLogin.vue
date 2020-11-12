@@ -44,44 +44,33 @@ export default {
     return {
       email    : null,
       password : null,
-      response : [],
-      urlPrefixComproCategoryAPI : process.env.VUE_APP_URL_PREFIX_COMPRO_CATEGORY_API,
-
+      host : process.env.VUE_APP_NINGENME_API_HOST,
+      access_token : null,
     }
   },
   watch : {
-    response: function() {
+    email: function() {
       this.$store.dispatch('setEmail',this.email)
-      this.$store.dispatch('setAccessToken',this.response["access_token"])
+    },
+    access_token: function() {
+      this.$store.dispatch('setAccessToken',this.access_token)
     },
   },
 
   methods : {
     authLogin : function (event) {
+      var params = new URLSearchParams();
+      params.append('email', this.email);
+      params.append('password', this.password);
 
-      axios({
-        url: this.urlPrefixComproCategoryAPI + '/login',
-        method: 'post',
-        data: {
-          'email': this.email,
-          'password': this.password,
+      axios.post(this.host + '/v1/login', params)
+      .then(
+        response => {
+          this.access_token = response.headers["authorization"]
+          console.log(response)
         }
-      }).then(
-        response => (this.response = response.data)
-        )
-    },
-    authCheck : function (event) {
-
-      axios({
-        url: this.urlPrefixComproCategoryAPI + '/me',
-        method: 'get',
-        headers: {
-                   "Authorization" : "Bearer " + this.$store.getters['getAccessToken'], 
-        },
-      }).then(response => (this.response = response.data))
-      this.$router.push('/')
+      )
     }
-
   }
 }
         

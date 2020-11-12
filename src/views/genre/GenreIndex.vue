@@ -49,12 +49,13 @@ export default {
     return {
       genres : [],
       selected_genre: 'search',
-      urlPrefixComproCategoryAPI : process.env.VUE_APP_URL_PREFIX_NINGENME_API,
+      host : process.env.VUE_APP_NINGENME_API_HOST,
+      path : process.env.VUE_APP_NINGENME_API_PATH,
     }
   },
   mounted () {
     axios
-      .get(this.urlPrefixComproCategoryAPI + '/genres')
+      .get(this.host + this.path + '/genres')
       .then(response => (this.genres = response.data['genreList']))
   },
 }
