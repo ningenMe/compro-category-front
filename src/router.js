@@ -66,6 +66,10 @@ export default new Router({
             component: TaskIndex
         },
         {
+            path: '/tasks/offset/:offset',
+            component: TaskIndex
+        },
+        {
             path: '/tasks/create',
             component: TaskCreate
         },

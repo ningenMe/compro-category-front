@@ -4,11 +4,11 @@
     <!-- edit,create button -->
     <v-row>
         <v-col cols="auto" class="mr-auto">
-            <v-btn outlined color="yellow darken-3" disabled>task</v-btn>
+            <v-btn outlined color="yellow darken-3" disabled>tasks</v-btn>
             <v-btn outlined color="yellow darken-3">
                 <select v-model="task">
                     <option v-bind:value="task" v-for="(task,i) in tasks" v-bind:key="i">
-                        {{ task.taskName}}
+                        {{task.taskName}}
                     </option>
                 </select>
                 ▼
@@ -20,7 +20,17 @@
         <v-col cols="auto">
             <v-btn outlined color="light-blue accent-4" to='/tasks/create' v-if="this.$store.getters['getAccessToken'] != null">task create</v-btn>
         </v-col>
+    </v-row>
 
+    <!-- pagenation -->
+    <v-row>
+        <v-col cols="auto" class="mr-auto">
+        </v-col>
+        <v-col cols="auto">
+            <v-btn outlined color="yellow darken-3" v-bind:to="'/tasks/offset/'+this.prev_offset" v-if="this.prev_offset != this.offset">from {{this.prev_offset}}</v-btn>
+            <v-btn outlined color="yellow darken-3" v-bind:to="'/tasks/offset/'+this.offset">from {{this.offset}}</v-btn>
+            <v-btn outlined color="yellow darken-3" v-bind:to="'/tasks/offset/'+this.next_offset">from {{this.next_offset}}</v-btn>
+        </v-col>
     </v-row>
 
     <v-layout row wrap>
@@ -32,10 +42,10 @@
                 <div class="body-2">
                     <router-link v-bind:to="'/tasks/' + data.item.taskId" class="body-2">{{data.item.taskName}}</router-link>
 
-                    <!--            <br/>  -->
-                    <!--    <a class="my-2" v-for="(tag,i) in data.item.tags" v-bind:key="i">-->
-                    <!--      <v-chip rounded outlined dark color="secondary" small v-bind:to="'topics/' + tag.topic_id + '/tasks'">{{tag.topic_name}}</v-chip>-->
-                    <!--    </a>-->
+                    <br />
+                    <a class="my-2" v-for="(topic,i) in data.item.comproCategoryTopicList" v-bind:key="i">
+                        <v-chip rounded outlined dark color="secondary" small v-bind:to="'topics/' + topic.topicId + '/tasks'">{{topic.topicName}}</v-chip>
+                    </a>
                 </div>
             </template>
 
@@ -66,6 +76,9 @@ export default {
             task: [],
             host: process.env.VUE_APP_NINGENME_API_HOST,
             path: process.env.VUE_APP_NINGENME_API_PATH,
+            prev_offset: 1,
+            offset: 1,
+            next_offset: 1,
             keys: [{
                     key: 'task',
                     sortable: false,
@@ -93,9 +106,26 @@ export default {
 
         }
     },
-    mounted() {
+    //一旦二重実装だけど良しとする
+    updated() {
+        if (this.$route.params.offset) this.offset = Number(this.$route.params.offset);
+        if (isNaN(this.offset)) this.offset = 1;
+        if (50 < this.offset) this.prev_offset = this.offset - 50;
+        this.next_offset = this.offset + 50;
         axios
-            .get(this.host + this.path + '/tasks')
+            .get(this.host + this.path + '/tasks?offset=' + this.offset)
+            .then(response => (this.tasks = response.data.comproCategoryTaskList))
+            .catch(err => {
+                console.log('err:', err);
+            })
+    },
+    mounted() {
+        if (this.$route.params.offset) this.offset = Number(this.$route.params.offset);
+        if (isNaN(this.offset)) this.offset = 1;
+        if (50 < this.offset) this.prev_offset = this.offset - 50;
+        this.next_offset = this.offset + 50;
+        axios
+            .get(this.host + this.path + '/tasks?offset=' + this.offset)
             .then(response => (this.tasks = response.data.comproCategoryTaskList))
             .catch(err => {
                 console.log('err:', err);
