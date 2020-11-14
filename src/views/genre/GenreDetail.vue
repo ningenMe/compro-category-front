@@ -39,10 +39,10 @@
                 <v-toolbar-title class="body-2">{{topic.topicName}}</v-toolbar-title>
             </v-toolbar>
 
-            <b-table small striped :items="topic.tasks" :fields="keys" :fixed="true">
+            <b-table small striped :items="topic.comproCategoryTaskList" :fields="keys" :fixed="true">
                 <!-- taskカラム -->
                 <template v-slot:cell(task)="data">
-                    <router-link v-bind:to="'/tasks/' + data.item.task_id" class="body-2">{{data.item.task_name}}</router-link>
+                    <router-link v-bind:to="'/tasks/' + data.item.taskId" class="body-2">{{data.item.taskName}}</router-link>
                 </template>
 
                 <!-- urlカラム -->

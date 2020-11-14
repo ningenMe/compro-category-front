@@ -106,7 +106,6 @@ export default {
 
         }
     },
-    //一旦二重実装だけど良しとする
     updated() {
         this.fetchTasks();
     },

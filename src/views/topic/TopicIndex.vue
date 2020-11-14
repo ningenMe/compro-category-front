@@ -33,7 +33,7 @@
             </template>
             <!-- topicカラム -->
             <template v-slot:cell(topic)="data">
-                <v-chip rounded outlined dark color="secondary" small v-bind:to="'topics/' + data.item.topic_id + '/tasks'">{{data.item.topicName}}</v-chip>
+                <v-chip rounded outlined dark color="secondary" small v-bind:to="'topics/' + data.item.topicId + '/tasks'">{{data.item.topicName}}</v-chip>
             </template>
         </b-table>
     </v-card>
@@ -70,15 +70,25 @@ export default {
 
         }
     },
+    updated() {
+        this.fetchTopic();
+    },
     mounted() {
-        axios
-            .get(this.host + this.path + '/topics')
-            .then(response => (this.topics = response.data.comproCategoryTopicList))
+        this.fetchTopic();
     },
     methods: {
         prepareTopicEdit(topic) {
             this.$store.dispatch('setTopic', topic)
             this.$router.push('/topics/' + topic.topicId + '/edit')
+        },
+        fetchTopic() {
+            axios
+                .get(this.host + this.path + '/topics')
+                .then(response => (this.topics = response.data.comproCategoryTopicList))
+                .catch(err => {
+                    console.log('err:', err);
+                })
+
         }
     }
 
