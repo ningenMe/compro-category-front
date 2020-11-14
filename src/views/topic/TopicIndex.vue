@@ -28,6 +28,7 @@
     <v-card>
         <b-table small striped :items="topics" :fields="keys" :fixed="true">
             <!-- genreカラム -->
+            <!-- ここ壊れてるので直しましょう(topicに親genreのラベルをもたせる必要がある) -->
             <template v-slot:cell(genre)="data">
                 <v-chip rounded outlined dark color="cyan darken-4" small v-bind:to="'genres/' + data.item.label + '/topics'">{{data.item.genreName}}</v-chip>
             </template>
