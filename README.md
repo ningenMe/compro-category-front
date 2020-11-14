@@ -1,8 +1,12 @@
 ![](https://github.com/ningenMe/compro-category-front/workflows/deploy/badge.svg)  
 ## compro-category-front
+[compro-category](https://compro-category.ningenme.net)のフロントエンド
 
-### これは何？
-https://compro-category.ningenme.net のフロントエンド
+### compro-categoryって何？
+競技プログラミングの問題のカテゴライズ 兼 ningenMeの精進記録を管理するwebアプリ。
+
+バックエンドはこちら   
+https://github.com/ningenMe/ningenme-net-api
 
 
 #### アーキテクチャ
@@ -15,7 +19,7 @@ https://compro-category.ningenme.net のフロントエンド
 
 #### ローカルで実行するとき
 ```
-yarn start
+yarn run serve
 ```
 #### ビルドするとき
 ```
