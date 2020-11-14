@@ -108,28 +108,25 @@ export default {
     },
     //一旦二重実装だけど良しとする
     updated() {
-        if (this.$route.params.offset) this.offset = Number(this.$route.params.offset);
-        if (isNaN(this.offset)) this.offset = 1;
-        if (50 < this.offset) this.prev_offset = this.offset - 50;
-        this.next_offset = this.offset + 50;
-        axios
-            .get(this.host + this.path + '/tasks?offset=' + this.offset)
-            .then(response => (this.tasks = response.data.comproCategoryTaskList))
-            .catch(err => {
-                console.log('err:', err);
-            })
+        this.fetchTasks();
     },
     mounted() {
-        if (this.$route.params.offset) this.offset = Number(this.$route.params.offset);
-        if (isNaN(this.offset)) this.offset = 1;
-        if (50 < this.offset) this.prev_offset = this.offset - 50;
-        this.next_offset = this.offset + 50;
-        axios
-            .get(this.host + this.path + '/tasks?offset=' + this.offset)
-            .then(response => (this.tasks = response.data.comproCategoryTaskList))
-            .catch(err => {
-                console.log('err:', err);
-            })
+        this.fetchTasks();
+    },
+    methods: {
+        fetchTasks() {
+            if (this.$route.params.offset) this.offset = Number(this.$route.params.offset);
+            if (isNaN(this.offset)) this.offset = 1;
+            this.prev_offset = 1;
+            if (50 < this.offset) this.prev_offset = this.offset - 50;
+            this.next_offset = this.offset + 50;
+            axios
+                .get(this.host + this.path + '/tasks?offset=' + this.offset)
+                .then(response => (this.tasks = response.data.comproCategoryTaskList))
+                .catch(err => {
+                    console.log('err:', err);
+                })
+        },
     },
 }
 </script>

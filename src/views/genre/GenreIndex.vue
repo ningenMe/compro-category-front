@@ -26,11 +26,7 @@
     <v-layout row wrap>
         <v-flex xs6 v-for="(genre,i) in genres" v-bind:key="i">
             <v-container class="pa-2">
-                <v-card>
-                    <v-card-text>
-                        <v-btn text small block v-bind:to="'/genres/' + genre.label + '/topics'">{{genre.genreName}}</v-btn>
-                    </v-card-text>
-                </v-card>
+                <v-btn text small block outlined elevation="10" class="pt-7 pb-7" v-bind:to="'/genres/' + genre.label + '/topics'">{{genre.genreName}}</v-btn>
             </v-container>
         </v-flex>
     </v-layout>
