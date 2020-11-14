@@ -14,7 +14,7 @@
                 ▼
             </v-btn>
             <v-btn outlined color="yellow darken-3" v-on:click='prepareTopicEdit(selected_topic)' v-if="$store.getters['getAccessToken'] != null">edit</v-btn>
-            <v-btn outlined color="yellow darken-3" v-bind:to="'/topics/' + selected_topic.topic_id + '/tasks'" v-if="$store.getters['getAccessToken'] == null">tasks</v-btn>
+            <v-btn outlined color="yellow darken-3" v-bind:to="'/topics/' + selected_topic.topicId + '/tasks'" v-if="$store.getters['getAccessToken'] == null">tasks</v-btn>
 
         </v-col>
 
