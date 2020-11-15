@@ -106,9 +106,9 @@ export default {
 
         }
     },
-    updated() {
-        this.fetchTasks();
-    },
+    // updated() {
+    //     this.fetchTasks();
+    // },
     mounted() {
         this.fetchTasks();
     },
