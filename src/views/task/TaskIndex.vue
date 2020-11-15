@@ -23,7 +23,7 @@
     </v-row>
 
     <!-- pagenation -->
-    <v-row>
+    <!-- <v-row>
         <v-col cols="auto" class="mr-auto">
         </v-col>
         <v-col cols="auto">
@@ -31,7 +31,7 @@
             <v-btn outlined color="yellow darken-3" v-bind:to="'/tasks/offset/'+this.offset">from {{this.offset}}</v-btn>
             <v-btn outlined color="yellow darken-3" v-bind:to="'/tasks/offset/'+this.next_offset">from {{this.next_offset}}</v-btn>
         </v-col>
-    </v-row>
+    </v-row> -->
 
     <v-layout row wrap>
 
