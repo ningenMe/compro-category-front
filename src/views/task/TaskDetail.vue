@@ -63,10 +63,7 @@ export default {
             path: process.env.VUE_APP_NINGENME_API_PATH,
         }
     },
-    updated() {
-        this.fetchTask();
-    },
-    mounted() {
+    created() {
         this.fetchTask();
     },
     methods: {

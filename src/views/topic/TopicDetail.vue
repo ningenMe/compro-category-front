@@ -65,10 +65,7 @@ export default {
 
         }
     },
-    updated() {
-        this.fetchTopic();
-    },
-    mounted() {
+    created() {
         this.fetchTopic();
     },
     methods: {

@@ -109,7 +109,7 @@ export default {
     // updated() {
     //     this.fetchTasks();
     // },
-    mounted() {
+    created() {
         this.fetchTasks();
     },
     methods: {
