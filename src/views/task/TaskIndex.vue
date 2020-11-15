@@ -76,9 +76,9 @@ export default {
             task: [],
             host: process.env.VUE_APP_NINGENME_API_HOST,
             path: process.env.VUE_APP_NINGENME_API_PATH,
-            prev_offset: 1,
-            offset: 1,
-            next_offset: 1,
+            prev_offset: 0,
+            offset: 0,
+            next_offset: 0,
             keys: [{
                     key: 'task',
                     sortable: false,
@@ -115,9 +115,9 @@ export default {
     methods: {
         fetchTasks() {
             if (this.$route.params.offset) this.offset = Number(this.$route.params.offset);
-            if (isNaN(this.offset)) this.offset = 1;
-            this.prev_offset = 1;
-            if (50 < this.offset) this.prev_offset = this.offset - 50;
+            if (isNaN(this.offset)) this.offset = 0;
+            this.prev_offset = 0;
+            if (50 <= this.offset) this.prev_offset = this.offset - 50;
             this.next_offset = this.offset + 50;
             axios
                 .get(this.host + this.path + '/tasks?offset=' + this.offset)
