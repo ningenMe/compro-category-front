@@ -3,7 +3,7 @@
     <!-- edit,create button -->
     <v-row>
         <v-col cols="auto" class="mr-auto">
-            <v-btn outlined color="yellow darken-3" v-bind:to="'/tasks/' + tasks[0].task_id + '/edit'" v-if="$store.getters['getAccessToken'] != null">edit</v-btn>
+            <v-btn outlined color="yellow darken-3" v-bind:to="'/tasks/' + task.taskId + '/edit'" v-if="$store.getters['getAccessToken'] != null">edit</v-btn>
 
         </v-col>
         <v-col cols="auto">

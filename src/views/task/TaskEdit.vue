@@ -6,7 +6,7 @@
       lazy-validation
       >
         <v-text-field
-          v-model="name"
+          v-model="task.taskName"
           :counter="255"
           label="name"
           outlined
@@ -14,25 +14,25 @@
         ></v-text-field>
 
         <v-text-field
-          v-model="url"
+          v-model="task.url"
           label="url"
           outlined
           required
         ></v-text-field>
 
         <v-text-field
-          v-model="estimation"
+          v-model="task.estimation"
           label="estimation"
           outlined
           required
         ></v-text-field>
 
-        <div v-for="(genre,i) in genres" v-bind:key="i">
+        <div v-for="(genre,i) in comproCategoryGenreList" v-bind:key="i">
           <v-select
-            v-model="genre_topic_ids[genre.genre_id]"
-            item-text="topic_name"
-            item-value="topic_id"
-            :items="genre.topics"
+            v-model="task.topicIdList"
+            item-text="topicName"
+            item-value="topicId"
+            :items="genre.comproCategoryTopicList"
             :label="genre.label"
             outlined
             multiple
@@ -67,55 +67,48 @@ import axios from 'axios';
 export default {
   data () {
     return {
-      genres          : [],
-      genre_topic_ids : {},
+      comproCategoryGenreList : [],
       task            : null,
-      name            : null,
-      url             : null,
-      estimation      : null,
-      response        : [],
-      response2        : [],
-      urlPrefixComproCategoryAPI : process.env.VUE_APP_URL_PREFIX_COMPRO_CATEGORY_API,
+      host: process.env.VUE_APP_NINGENME_API_HOST,
+      path: process.env.VUE_APP_NINGENME_API_PATH,
     }
   },
-  watch : {
-    task: function() {
-      this.name       = this.task.name
-      this.url        = this.task.url
-      this.estimation = this.task.estimation
-    }
-  },
-
   mounted () {
     axios
-      .get(this.urlPrefixComproCategoryAPI + '/genres/all/topics')
-      .then(response => (this.genres = response.data))
+        .get(this.host + this.path + '/genres/topics')
+        .then(response => (this.comproCategoryGenreList = response.data.comproCategoryGenreList))
+        .catch(err => {
+            console.log('err:', err);
+        })
     axios
-      .get(this.urlPrefixComproCategoryAPI + '/tasks/' + this.$route.params.task_id)
-      .then(response => (this.task = response.data))
-    axios
-      .get(this.urlPrefixComproCategoryAPI + '/tags/tasks/' + this.$route.params.task_id)
-      .then(response => (this.genre_topic_ids = response.data))
+      .get(this.host + this.path + '/tasks/' + this.$route.params.task_id)
+      .then(response => (this.task = response.data.comproCategoryTask))
+      .catch(err => {
+          console.log('err:', err);
+      })
   },
   methods : {
     taskUpdate : function (event) {
       axios({
-        url: this.urlPrefixComproCategoryAPI + '/tasks/' +  this.task.task_id,
+        url: this.host + this.path + '/tasks/' + this.$route.params.task_id,
         method: 'put',
         headers: {
-                   "Authorization" : "Bearer " + this.$store.getters['getAccessToken'], 
+                   "Authorization" : this.$store.getters['getAccessToken'], 
         },
         data: {
-          'task_id'          : this.task.task_id,
-          'genre_topic_ids'  : this.genre_topic_ids,
-          'name'             : this.name,
-          'url'              : this.url, 
-          'estimation'       : this.estimation, 
+          'taskId'           : this.task.taskId,
+          'topicIdList'      : this.task.topicIdList,
+          'taskName'         : this.task.taskName,
+          'url'              : this.task.url, 
+          'score'            : this.task.score,
+          'estimation'       : this.task.estimation, 
         }
-      }).then(response => (
-        this.response = response.data))
-        this.$router.push('/tasks')
-
+      })
+      .then(response => (this.response = response.data))
+      .catch(err => {
+          console.log('err:', err);
+      })
+      this.$router.push('/tasks')
     },
     taskDelete : function (event) {
       axios({

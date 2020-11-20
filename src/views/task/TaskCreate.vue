@@ -6,7 +6,7 @@
       lazy-validation
       >
         <v-text-field
-          v-model="name"
+          v-model="taskName"
           :counter="255"
           label="name"
           outlined
@@ -27,12 +27,12 @@
           required
         ></v-text-field>
 
-        <div v-for="(genre,i) in genres" v-bind:key="i">
+        <div v-for="(genre,i) in comproCategoryGenreList" v-bind:key="i">
           <v-select
-            v-model="genre_topic_ids[genre.genre_id]"
-            item-text="topic_name"
-            item-value="topic_id"
-            :items="genre.topics"
+            v-model="topicIdList"
+            item-text="topicName"
+            item-value="topicId"
+            :items="genre.comproCategoryTopicList"
             :label="genre.label"
             outlined
             multiple
@@ -62,33 +62,36 @@ import axios from 'axios';
 export default {
   data () {
     return {
-      genres          : [],
-      genre_topic_ids : {},
-      name            : "task",
-      url             : null,
-      estimation      : 0,
-      response        : [],
-      urlPrefixComproCategoryAPI : process.env.VUE_APP_URL_PREFIX_COMPRO_CATEGORY_API,
+      comproCategoryGenreList : [],
+      taskName    : '',
+      url         : null,
+      estimation  : 0,
+      topicIdList : [], 
+      host: process.env.VUE_APP_NINGENME_API_HOST,
+      path: process.env.VUE_APP_NINGENME_API_PATH,
     }
   },
   mounted () {
     axios
-      .get(this.urlPrefixComproCategoryAPI + '/genres/all/topics')
-      .then(response => (this.genres = response.data))
+        .get(this.host + this.path + '/genres/topics')
+        .then(response => (this.comproCategoryGenreList = response.data.comproCategoryGenreList))
+        .catch(err => {
+            console.log('err:', err);
+        })
   },
   methods : {
     taskCreate : function (event) {
       axios({
-        url: this.urlPrefixComproCategoryAPI + '/tasks',
+        url: this.host + this.path + '/tasks',
         method: 'post',
         headers: {
-                   "Authorization" : "Bearer " + this.$store.getters['getAccessToken'], 
+                   "Authorization" : this.$store.getters['getAccessToken'], 
         },
         data: {
-          'genre_topic_ids'  : this.genre_topic_ids,
-          'name'       : this.name,
+          'taskName'   : this.taskName,
           'url'        : this.url, 
-          'estimation' : this.estimation, 
+          'estimation' : this.estimation,
+          'topicIdList': this.topicIdList,
         }
       }).then(response => (
         this.response = response.data))

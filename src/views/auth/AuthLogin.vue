@@ -66,7 +66,7 @@ export default {
       axios.post(this.host + '/v1/login', params)
       .then(
         response => {
-          this.access_token = response.headers["authorization"]
+          this.access_token = response.headers["x-amzn-remapped-authorization"]
           console.log(response)
         }
       )
