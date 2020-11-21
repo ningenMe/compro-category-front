@@ -8,6 +8,8 @@
 バックエンドはこちら   
 https://github.com/ningenMe/ningenme-net-api
 
+### システム構成図
+![compro-category](img/compro-category.png "compro-category")
 
 #### アーキテクチャ
 |            |                |
